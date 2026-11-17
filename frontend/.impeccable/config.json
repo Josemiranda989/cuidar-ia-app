@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "plus jakarta sans",
+        "createdAt": "2026-11-17T18:57:55.995Z",
+        "reason": "user explicitly requested Plus Jakarta Sans in index.html; DESIGN.md front-matter mandates it for all typography tokens"
+      }
+    ]
+  }
+}
