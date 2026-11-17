@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
-import { create } from '../services/medications.service';
+import { useState, useEffect, useRef } from 'react';
+import { create, update } from '../services/medications.service';
 import { getAll as getDependents } from '../services/dependents.service';
+import Spinner from './Spinner';
 
 const getTodayDate = () => new Date().toISOString().split('T')[0];
 
@@ -15,13 +16,56 @@ const initialFormState = {
   fecha_inicio: getTodayDate(),
 };
 
-function MedicacionForm({ onCreated }) {
+// Field ergonomics de DESIGN.md: alto mínimo 52px, borde 1.5px, foco teal con halo.
+const fieldClass =
+  'h-13 w-full rounded-lg border-[1.5px] border-outline-variant bg-surface-container-lowest px-space-md font-body-md text-body-md text-on-surface placeholder:text-outline transition-colors focus:border-primary-container focus:outline-none focus:ring-4 focus:ring-primary-container/20 disabled:cursor-not-allowed disabled:opacity-60';
+
+const labelClass = 'font-label-md text-label-md text-on-surface';
+
+const SUCCESS_TIMEOUT_MS = 3000;
+
+// Pasa una medicación de la API a la forma del estado del form.
+const toFormState = (med) => ({
+  persona_id: med.persona_id ?? '',
+  droga: med.droga ?? '',
+  nombre_comercial: med.nombre_comercial ?? '',
+  concentracion: med.concentracion ?? '',
+  cantidad_por_toma: med.cantidad_por_toma ?? 1,
+  forma: med.forma ?? 'comprimido',
+  es_sos: Boolean(med.es_sos),
+  fecha_inicio: med.fecha_inicio ?? getTodayDate(),
+});
+
+function MedicacionForm({ editingMed, onSaved, onCancelEdit }) {
   const [form, setForm] = useState(initialFormState);
   const [dependents, setDependents] = useState([]);
   const [loadingDependents, setLoadingDependents] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const [successMsg, setSuccessMsg] = useState(null);
+  const sectionRef = useRef(null);
+
+  const isEditing = Boolean(editingMed);
+
+  // Al elegir "Editar" en una tarjeta: cargar los datos y llevar el form a la vista.
+  // Al salir de edición (guardar o cancelar): volver al form vacío.
+  useEffect(() => {
+    if (editingMed) {
+      setForm(toFormState(editingMed));
+      setError(null);
+      setSuccessMsg(null);
+      sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      setForm({ ...initialFormState, fecha_inicio: getTodayDate() });
+    }
+  }, [editingMed]);
+
+  // El badge de éxito se va solo a los 3s.
+  useEffect(() => {
+    if (!successMsg) return undefined;
+    const timeoutId = setTimeout(() => setSuccessMsg(null), SUCCESS_TIMEOUT_MS);
+    return () => clearTimeout(timeoutId);
+  }, [successMsg]);
 
   useEffect(() => {
     let isMounted = true;
@@ -70,16 +114,21 @@ function MedicacionForm({ onCreated }) {
         cantidad_por_toma: Number(form.cantidad_por_toma) || form.cantidad_por_toma,
       };
 
-      await create(payload);
+      if (isEditing) {
+        await update(editingMed.id, payload);
+        setSuccessMsg('Medicación actualizada con éxito.');
+      } else {
+        await create(payload);
+        setSuccessMsg('Medicación registrada con éxito.');
+      }
 
-      setSuccessMsg('Medicación registrada con éxito.');
       setForm({
         ...initialFormState,
         fecha_inicio: getTodayDate(),
       });
 
-      if (typeof onCreated === 'function') {
-        onCreated();
+      if (typeof onSaved === 'function') {
+        onSaved();
       }
     } catch (err) {
       const errorMsg =
@@ -93,58 +142,64 @@ function MedicacionForm({ onCreated }) {
   };
 
   return (
-    <div
-      style={{
-        backgroundColor: '#ffffff',
-        border: '1px solid #e2e8f0',
-        borderRadius: '8px',
-        padding: '20px',
-        marginBottom: '24px',
-        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)',
-      }}
+    <section
+      ref={sectionRef}
+      className={`mb-space-xl scroll-mt-36 rounded-xl bg-surface-container-lowest p-space-lg font-body-md text-body-md text-on-surface shadow-md sm:p-margin-desktop ${
+        isEditing ? 'ring-2 ring-primary-container/40' : ''
+      }`}
     >
-      <h2 style={{ fontSize: '1.25rem', marginBottom: '16px', color: '#2d3748' }}>
-        Nueva Medicación
-      </h2>
+      <div className="mb-space-lg flex items-center gap-space-sm">
+        <div
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary"
+          aria-hidden="true"
+        >
+          <span className="material-symbols-outlined text-[24px]">
+            {isEditing ? 'edit' : 'edit_note'}
+          </span>
+        </div>
+        <div className="min-w-0">
+          <h2 className="font-headline-sm text-headline-sm text-on-surface">
+            {isEditing
+              ? `Editando: ${editingMed.nombre_comercial || editingMed.droga}`
+              : 'Nueva Medicación'}
+          </h2>
+          <p className="font-body-sm text-body-sm text-on-surface-variant">
+            {isEditing
+              ? 'Corregí lo que haga falta y guardá los cambios.'
+              : 'Completá los datos tal como figuran en la caja o la receta.'}
+          </p>
+        </div>
+      </div>
 
       {error && (
         <div
-          style={{
-            padding: '10px 14px',
-            backgroundColor: '#fff5f5',
-            color: '#c53030',
-            border: '1px solid #feb2b2',
-            borderRadius: '6px',
-            marginBottom: '14px',
-            fontSize: '0.9rem',
-          }}
+          role="alert"
+          className="mb-space-md flex items-start gap-space-sm rounded-lg bg-error-container p-space-md font-body-sm text-body-sm text-on-error-container"
         >
-          <strong>Error:</strong> {error}
+          <span className="material-symbols-outlined shrink-0 text-[20px] text-error" aria-hidden="true">
+            error
+          </span>
+          <p>
+            <strong className="font-semibold">Error:</strong> {error}
+          </p>
         </div>
       )}
 
-      {successMsg && (
-        <div
-          style={{
-            padding: '10px 14px',
-            backgroundColor: '#f0fff4',
-            color: '#276749',
-            border: '1px solid #9ae6b4',
-            borderRadius: '6px',
-            marginBottom: '14px',
-            fontSize: '0.9rem',
-          }}
-        >
-          {successMsg}
-        </div>
-      )}
+      {/* Live region siempre montada para que el lector de pantalla anuncie el cambio. */}
+      <div role="status" aria-live="polite">
+        {successMsg && (
+          <span className="mb-space-md inline-flex items-center gap-1 rounded-full bg-secondary-fixed/40 px-space-md py-space-xs font-label-md text-label-md text-on-secondary-fixed-variant">
+            <span className="material-symbols-outlined text-[16px]" aria-hidden="true">
+              check_circle
+            </span>
+            {successMsg}
+          </span>
+        )}
+      </div>
 
-      <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '14px' }}>
-        <div>
-          <label
-            htmlFor="persona_id"
-            style={{ display: 'block', marginBottom: '4px', fontWeight: '500' }}
-          >
+      <form onSubmit={handleSubmit} className="space-y-space-lg">
+        <div className="flex flex-col gap-space-xs">
+          <label htmlFor="persona_id" className={labelClass}>
             Persona a Cargo *
           </label>
           <select
@@ -154,13 +209,7 @@ function MedicacionForm({ onCreated }) {
             onChange={handleChange}
             required
             disabled={loadingDependents}
-            style={{
-              width: '100%',
-              padding: '8px 10px',
-              borderRadius: '6px',
-              border: '1px solid #cbd5e0',
-              backgroundColor: '#fff',
-            }}
+            className={fieldClass}
           >
             <option value="">
               {loadingDependents
@@ -175,18 +224,9 @@ function MedicacionForm({ onCreated }) {
           </select>
         </div>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: '12px',
-          }}
-        >
-          <div>
-            <label
-              htmlFor="droga"
-              style={{ display: 'block', marginBottom: '4px', fontWeight: '500' }}
-            >
+        <div className="grid grid-cols-1 gap-space-lg md:grid-cols-2">
+          <div className="flex flex-col gap-space-xs">
+            <label htmlFor="droga" className={labelClass}>
               Droga (Principio Activo) *
             </label>
             <input
@@ -197,21 +237,15 @@ function MedicacionForm({ onCreated }) {
               onChange={handleChange}
               placeholder="Ej: Enalapril"
               required
-              style={{
-                width: '100%',
-                padding: '8px 10px',
-                borderRadius: '6px',
-                border: '1px solid #cbd5e0',
-                boxSizing: 'border-box',
-              }}
+              className={fieldClass}
             />
+            <span className="font-body-sm text-body-sm text-outline">
+              El nombre genérico que figura en la receta.
+            </span>
           </div>
 
-          <div>
-            <label
-              htmlFor="nombre_comercial"
-              style={{ display: 'block', marginBottom: '4px', fontWeight: '500' }}
-            >
+          <div className="flex flex-col gap-space-xs">
+            <label htmlFor="nombre_comercial" className={labelClass}>
               Nombre Comercial
             </label>
             <input
@@ -221,29 +255,17 @@ function MedicacionForm({ onCreated }) {
               value={form.nombre_comercial}
               onChange={handleChange}
               placeholder="Ej: Lotrial"
-              style={{
-                width: '100%',
-                padding: '8px 10px',
-                borderRadius: '6px',
-                border: '1px solid #cbd5e0',
-                boxSizing: 'border-box',
-              }}
+              className={fieldClass}
             />
+            <span className="font-body-sm text-body-sm text-outline">
+              Tal como figura en la cajita.
+            </span>
           </div>
         </div>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-            gap: '12px',
-          }}
-        >
-          <div>
-            <label
-              htmlFor="concentracion"
-              style={{ display: 'block', marginBottom: '4px', fontWeight: '500' }}
-            >
+        <div className="grid grid-cols-1 gap-space-lg sm:grid-cols-2 lg:grid-cols-4">
+          <div className="flex flex-col gap-space-xs">
+            <label htmlFor="concentracion" className={labelClass}>
               Concentración *
             </label>
             <input
@@ -254,21 +276,12 @@ function MedicacionForm({ onCreated }) {
               onChange={handleChange}
               placeholder="Ej: 10 mg"
               required
-              style={{
-                width: '100%',
-                padding: '8px 10px',
-                borderRadius: '6px',
-                border: '1px solid #cbd5e0',
-                boxSizing: 'border-box',
-              }}
+              className={fieldClass}
             />
           </div>
 
-          <div>
-            <label
-              htmlFor="cantidad_por_toma"
-              style={{ display: 'block', marginBottom: '4px', fontWeight: '500' }}
-            >
+          <div className="flex flex-col gap-space-xs">
+            <label htmlFor="cantidad_por_toma" className={labelClass}>
               Cantidad por toma *
             </label>
             <input
@@ -280,21 +293,12 @@ function MedicacionForm({ onCreated }) {
               value={form.cantidad_por_toma}
               onChange={handleChange}
               required
-              style={{
-                width: '100%',
-                padding: '8px 10px',
-                borderRadius: '6px',
-                border: '1px solid #cbd5e0',
-                boxSizing: 'border-box',
-              }}
+              className={`${fieldClass} tabular-nums`}
             />
           </div>
 
-          <div>
-            <label
-              htmlFor="forma"
-              style={{ display: 'block', marginBottom: '4px', fontWeight: '500' }}
-            >
+          <div className="flex flex-col gap-space-xs">
+            <label htmlFor="forma" className={labelClass}>
               Forma *
             </label>
             <select
@@ -303,14 +307,7 @@ function MedicacionForm({ onCreated }) {
               value={form.forma}
               onChange={handleChange}
               required
-              style={{
-                width: '100%',
-                padding: '8px 10px',
-                borderRadius: '6px',
-                border: '1px solid #cbd5e0',
-                backgroundColor: '#fff',
-                boxSizing: 'border-box',
-              }}
+              className={fieldClass}
             >
               <option value="comprimido">Comprimido</option>
               <option value="gota">Gota</option>
@@ -319,11 +316,8 @@ function MedicacionForm({ onCreated }) {
             </select>
           </div>
 
-          <div>
-            <label
-              htmlFor="fecha_inicio"
-              style={{ display: 'block', marginBottom: '4px', fontWeight: '500' }}
-            >
+          <div className="flex flex-col gap-space-xs">
+            <label htmlFor="fecha_inicio" className={labelClass}>
               Fecha Inicio *
             </label>
             <input
@@ -333,52 +327,58 @@ function MedicacionForm({ onCreated }) {
               value={form.fecha_inicio}
               onChange={handleChange}
               required
-              style={{
-                width: '100%',
-                padding: '8px 10px',
-                borderRadius: '6px',
-                border: '1px solid #cbd5e0',
-                boxSizing: 'border-box',
-              }}
+              className={`${fieldClass} tabular-nums`}
             />
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: '4px 0' }}>
+        <label
+          htmlFor="es_sos"
+          className="flex min-h-12 cursor-pointer items-center gap-space-sm rounded-lg bg-surface-container-low px-space-md py-space-sm transition-colors hover:bg-surface-container"
+        >
           <input
             type="checkbox"
             id="es_sos"
             name="es_sos"
             checked={form.es_sos}
             onChange={handleChange}
-            style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+            className="h-5 w-5 shrink-0 cursor-pointer accent-primary"
           />
-          <label htmlFor="es_sos" style={{ cursor: 'pointer', fontSize: '0.95rem' }}>
+          <span className="material-symbols-outlined text-[20px] text-tertiary" aria-hidden="true">
+            medical_services
+          </span>
+          <span className="font-body-md text-body-md text-on-surface">
             Es medicación de rescate / eventual (SOS)
-          </label>
-        </div>
+          </span>
+        </label>
 
-        <button
-          type="submit"
-          disabled={submitting}
-          style={{
-            padding: '10px 16px',
-            backgroundColor: submitting ? '#a0aec0' : '#3182ce',
-            color: '#fff',
-            fontWeight: '600',
-            border: 'none',
-            borderRadius: '6px',
-            cursor: submitting ? 'not-allowed' : 'pointer',
-            marginTop: '8px',
-            justifySelf: 'start',
-          }}
-        >
-          {submitting ? 'Guardando...' : 'Guardar Medicación'}
-        </button>
+        <div className="flex flex-col-reverse gap-space-sm pt-space-md sm:flex-row sm:justify-end">
+          {isEditing && (
+            <button
+              type="button"
+              onClick={onCancelEdit}
+              disabled={submitting}
+              className="h-14 rounded-lg px-space-lg font-label-lg text-label-lg text-on-surface-variant transition-colors hover:bg-surface-container disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              Cancelar
+            </button>
+          )}
+          <button
+            type="submit"
+            disabled={submitting}
+            className="inline-flex h-14 w-full items-center justify-center gap-space-xs rounded-lg bg-primary px-space-xl font-label-lg text-label-lg text-on-primary shadow-md transition-all hover:bg-primary-container active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-primary sm:w-auto sm:min-w-56"
+          >
+            {submitting && <Spinner className="size-5" />}
+            {submitting
+              ? 'Guardando…'
+              : isEditing
+                ? 'Guardar Cambios'
+                : 'Guardar Medicación'}
+          </button>
+        </div>
       </form>
-    </div>
+    </section>
   );
 }
 
 export default MedicacionForm;
-

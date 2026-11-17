@@ -1,0 +1,362 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title>CuidAR</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-container-high":"#dee8ff","primary-container":"#0d766e","background":"#f9f9ff","tertiary-fixed":"#ffdcc3","surface-variant":"#d8e3fb","on-tertiary-container":"#ffe5d3","on-secondary-fixed":"#00201c","tertiary-container":"#a05600","secondary-fixed":"#71f8e4","on-secondary-fixed-variant":"#005048","on-surface":"#111c2d","on-tertiary-fixed-variant":"#6e3900","tertiary-fixed-dim":"#ffb77d","outline":"#6e7977","on-error":"#ffffff","surface-tint":"#006a63","on-primary":"#ffffff","error":"#ba1a1a","surface-container-highest":"#d8e3fb","on-secondary":"#ffffff","tertiary":"#7d4200","surface-container-lowest":"#ffffff","secondary-container":"#6df5e1","on-background":"#111c2d","inverse-on-surface":"#ecf1ff","surface-container-low":"#f0f3ff","surface":"#f9f9ff","on-primary-fixed-variant":"#00504a","error-container":"#ffdad6","secondary":"#006b5f","primary":"#005c55","secondary-fixed-dim":"#4fdbc8","surface-container":"#e7eeff","surface-dim":"#cfdaf2","primary-fixed-dim":"#7fd5cc","inverse-primary":"#7fd5cc","inverse-surface":"#263143","surface-bright":"#f9f9ff","on-surface-variant":"#3e4947","on-tertiary":"#ffffff","on-primary-fixed":"#00201d","outline-variant":"#bdc9c6","primary-fixed":"#9bf2e8","on-error-container":"#93000a","on-secondary-container":"#006f64","on-tertiary-fixed":"#2f1500","on-primary-container":"#a3faef"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xs":"0.25rem","gutter-desktop":"1.5rem",margin:"1rem","margin-desktop":"2.5rem","space-xl":"2rem","space-md":"1rem","space-sm":"0.5rem",gutter:"1rem","space-lg":"1.5rem","margin-tablet":"1.5rem","gutter-tablet":"1.25rem"},fontFamily:{"label-sm":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"time-display":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"]},fontSize:{"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.04em",fontWeight:"700"}],"label-lg":["15px",{lineHeight:"20px",letterSpacing:"0.01em",fontWeight:"600"}],"time-display":["28px",{lineHeight:"32px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-md":["15px",{lineHeight:"24px",fontWeight:"400"}],"headline-md":["20px",{lineHeight:"28px",fontWeight:"600"}],"display-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"700"}],"label-md":["13px",{lineHeight:"18px",letterSpacing:"0.02em",fontWeight:"600"}],"body-sm":["13px",{lineHeight:"20px",fontWeight:"400"}],"headline-sm":["18px",{lineHeight:"26px",fontWeight:"600"}],"headline-lg-mobile":["22px",{lineHeight:"30px",letterSpacing:"-0.01em",fontWeight:"700"}],"body-lg":["17px",{lineHeight:"26px",fontWeight:"400"}],"headline-lg":["26px",{lineHeight:"34px",letterSpacing:"-0.015em",fontWeight:"700"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 w-full px-gutter-desktop max-w-[1120px] mx-auto flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md min-w-0"><div class="flex items-center gap-space-sm shrink-0"><img alt="CuidAR Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1V7dUT1xhtGuPjG8_ulTUuK4ZYzQUplLH98CD8LXINlQISxjMt_QBizAZLNaN5i83ECiEvgTm5h-SjXrun0QJEfMpviOfKTw0Ez-8fNY1v_auEggfaLtNNUTyBYlmtJ9ts7I4uhCgK1ETBgFw5DrU6MJrAS7630fpRKTkR8b07pqUi47Q4EZoIw-qTRoZpt-0Vz_Ffh6HrByL4nnvoLIYMdxoSThZB3ZTkQqTihHJyX"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-semibold">CuidAR</span></div><div class="hidden sm:flex items-center gap-space-xs bg-surface-container px-space-md py-space-xs rounded-full shadow-[0_1px_4px_rgba(0,0,0,0.02)]"><span class="material-symbols-outlined text-primary text-[18px]">favorite</span><span class="font-label-md text-label-md text-on-surface font-semibold">Cuidando a: Elsa (81 años)</span></div></div><div class="flex items-center gap-space-md shrink-0"><button class="hidden md:flex items-center gap-space-xs bg-error-container hover:bg-error/20 text-on-error-container px-space-md py-space-xs rounded-full font-label-md text-label-md transition-colors" type="button"><span class="material-symbols-outlined text-error text-[18px]">emergency</span><span class="">Teléfono de Urgencias</span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="text-right hidden sm:block"><span class="block font-label-md text-label-md text-on-surface">Marina</span><span class="block font-label-sm text-label-sm text-on-surface-variant font-normal">Cuidadora Principal</span></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn1lcJnhTnlTwq1E2KiT4VYwJFGda8S8Np6HHzccJo4xjS_AdEQyQ1ndZqsNujsdjykyv7dyv2iGrOQ8G1UJGZ4CimA7_5ygAZwAM_hbO5ipkwU5egJdv6z_f3EW3VoXd9lXpqJ8cL1I9U-Uso60WOhqM7N4Jx_1MN9n4ZHXgaDjhFKtbIMFDxw4rcpfx9RvKmXIFwp6jhJmkYkQThu6s5cZ7Fidnqzntp9wEfBjgw"></div></div></div><div class="w-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.02)]"><div class="max-w-[1120px] mx-auto px-gutter-desktop"><nav class="flex items-center gap-space-xs py-space-xs overflow-x-auto" data-active-classes="bg-primary-container text-on-primary font-bold"><a class="px-space-md py-space-sm rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors whitespace-nowrap" data-path="hoy" href="#">Hoy</a><a class="px-space-md py-space-sm rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors whitespace-nowrap" data-path="vademecum" href="#">Vademécum</a><a class="px-space-md py-space-sm rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors whitespace-nowrap" data-path="ficha-medica" href="#">Ficha para el Médico</a><a aria-current="page" class="px-space-md py-space-sm rounded-lg transition-colors whitespace-nowrap bg-primary-container text-on-primary font-bold" data-path="perfil-elsa" href="#">Ficha de Elsa</a></nav></div></div></header><main class="w-full pt-32 max-w-[1120px] mx-auto px-gutter-desktop flex-1"><div class="flex flex-col w-full pb-16">
+<!-- Top Reassuring Notification Toast (Hidden by default, triggered on Save) -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-space-sm bg-primary text-on-primary px-space-lg py-space-md rounded-xl shadow-xl" id="save-toast">
+<span class="material-symbols-outlined text-[22px]">check_circle</span>
+<div>
+<p class="font-label-md text-label-md font-bold">Ficha de Elsa actualizada</p>
+<p class="font-body-sm text-body-sm opacity-90">Los cambios se guardaron con éxito.</p>
+</div>
+</div>
+<!-- Header Card: Identity & Primary Caregiver Relationship -->
+<div class="relative bg-surface-container-lowest rounded-xl shadow-sm p-space-md md:p-space-lg mb-space-lg">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-lg">
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-md">
+<!-- Avatar with Status Indicator -->
+<div class="relative shrink-0">
+<img class="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover shadow-md" data-alt="Warm natural portrait of an 81-year-old grandmother named Elsa with soft silver hair, kind smiling brown eyes, wearing a cozy teal knitted cardigan in a warm sunlit living room with plants in the background, cinematic soft lighting, Latin American elder." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMF3qBXBR_C9_aVdGoRcDLZUfmSMDDb4lDDIEeueV3EYZUu3W8yU3198y3u7JOdwJ9yTD37dA7kUgf96j28KBWruiFKUCbxlxaWWXeqvezGhoUx--j2DhJHHMyaI7q2_tXgO1a2yQVnIbB3lKVYYAPpsoGsY6-D5_tYEiTctJbU5Eqb7ZCY2FPrWMvzv_o9oZMUl-FsBPaqCPpms69HWNbtnyQVFucQc4aEXHw8BMA">
+<button class="absolute bottom-0 right-0 bg-primary hover:bg-primary-container text-on-primary p-space-xs rounded-full shadow-md transition-colors flex items-center justify-center" title="Cambiar foto de perfil" type="button">
+<span class="material-symbols-outlined text-[18px]">photo_camera</span>
+</button>
+</div>
+<!-- Personal Details Summary -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="bg-primary-container text-on-primary font-label-sm text-label-sm px-space-sm py-0.5 rounded-full uppercase tracking-wider">Persona a Cargo</span>
+<span class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm px-space-sm py-0.5 rounded-full">Parentesco: Madre</span>
+<span class="bg-surface-container-high text-primary font-label-sm text-label-sm px-space-sm py-0.5 rounded-full flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
+              En seguimiento activo
+            </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Elsa Beatriz Ramos</h1>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">calendar_today</span>
+<span class="">81 años (14 de mayo de 1943)</span>
+<span class="text-outline-variant">•</span>
+<span class="material-symbols-outlined text-primary text-[18px]">favorite</span>
+<span class="">Cuidadora: Marina Ramos (Hija)</span>
+</p>
+</div>
+</div>
+<!-- Quick Action Jump Links -->
+<div class="flex flex-row md:flex-col gap-space-xs shrink-0 w-full md:w-auto">
+<a class="flex-1 md:flex-initial flex items-center justify-center gap-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md px-space-md py-space-sm rounded-lg transition-colors shadow-sm" data-path="hoy" href="#">
+<span class="material-symbols-outlined text-primary text-[20px]">today</span>
+<span class="">Ver Tomas de Hoy</span>
+</a>
+<a class="flex-1 md:flex-initial flex items-center justify-center gap-space-xs bg-secondary-container/30 hover:bg-secondary-container/50 text-secondary font-label-md text-label-md px-space-md py-space-sm rounded-lg transition-colors" data-path="vademecum" href="#">
+<span class="material-symbols-outlined text-secondary text-[20px]">medication</span>
+<span class="">Ver Vademécum</span>
+</a>
+</div>
+</div>
+<!-- Quick Health Metric Snapshot Pills -->
+<div class="mt-space-md pt-space-md bg-surface-container-low/60 rounded-lg p-space-md flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+</div>
+<div>
+<span class="block font-label-sm text-label-sm text-error uppercase font-bold">Alergia Crítica</span>
+<span class="font-body-md text-body-md text-on-surface font-semibold">Penicilina y derivados</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">vital_signs</span>
+</div>
+<div>
+<span class="block font-label-sm text-label-sm text-on-surface-variant font-medium">Condición Principal</span>
+<span class="font-body-md text-body-md text-on-surface font-semibold">Hipertensión arterial controlada</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[20px]">shield</span>
+</div>
+<div>
+<span class="block font-label-sm text-label-sm text-on-surface-variant font-medium">Cobertura Principal</span>
+<span class="font-body-md text-body-md text-on-surface font-semibold">PAMI • Plan Dorado</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Edit Form Section (4 Structural Cards Bento Layout) -->
+<form class="flex flex-col gap-space-lg" id="profile-form" onsubmit="event.preventDefault(); triggerSave();">
+<!-- 2x2 Bento Cards Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-lg">
+<!-- Card 1: Datos Personales -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md md:p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-space-sm mb-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[24px]">badge</span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">1. Datos Personales</h2>
+</div>
+<span class="font-label-sm text-label-sm bg-surface-container px-space-xs py-0.5 rounded text-on-surface-variant font-medium">Civil</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="sm:col-span-2">
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1" for="fullName">Nombre Completo y Apellido</label>
+<input class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md px-space-md py-3 rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary shadow-inner" id="fullName" type="text" value="Elsa Beatriz Ramos">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1" for="birthDate">Fecha de Nacimiento</label>
+<input class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md px-space-md py-3 rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary shadow-inner" id="birthDate" type="date" value="1943-05-14">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1" for="dni">DNI / Documento</label>
+<input class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md px-space-md py-3 rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary shadow-inner" id="dni" type="text" value="4.582.109">
+</div>
+<div class="sm:col-span-2">
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1" for="address">Domicilio Actual</label>
+<div class="relative">
+<input class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md pl-10 pr-space-md py-3 rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary shadow-inner" id="address" type="text" value="Av. Pedro Goyena 1420, Piso 4to B, Caballito, CABA">
+<span class="material-symbols-outlined absolute left-3 top-3.5 text-outline text-[20px]">location_on</span>
+</div>
+</div>
+<div class="sm:col-span-2">
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1" for="kinship">Parentesco con el Cuidador</label>
+<select class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md px-space-md py-3 rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary shadow-inner" id="kinship">
+<option selected="" value="madre">Madre</option>
+<option value="padre">Padre</option>
+<option value="abuela">Abuela</option>
+<option value="abuelo">Abuelo</option>
+<option value="conyuge">Cónyuge / Pareja</option>
+<option value="otro">Otro familiar / Paciente externo</option>
+</select>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span class="">Último chequeo de DNI: Enero 2024</span>
+<span class="flex items-center gap-1 text-primary font-medium"><span class="material-symbols-outlined text-[16px]">verified</span> Verificado</span>
+</div>
+</section>
+<!-- Card 2: Cobertura Médica y Urgencias -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md md:p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-space-sm mb-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[24px]">health_and_safety</span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">2. Cobertura Médica</h2>
+</div>
+<span class="font-label-sm text-label-sm bg-error-container text-on-error-container px-space-xs py-0.5 rounded font-bold">Urgencias</span>
+</div>
+<!-- Quick SOS Dial Callout -->
+<div class="bg-error-container/40 p-space-sm rounded-lg mb-space-md flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-error text-[22px]">phone_in_talk</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-bold">Ambulancia 24hs / Emergencias</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">PAMI Urgencias: 139 / 0800-222-7264</p>
+</div>
+</div>
+<a class="bg-error hover:bg-error/90 text-on-error px-space-md py-2 rounded-lg font-label-md text-label-md flex items-center gap-1 transition-transform active:scale-95 shadow-sm" href="tel:139">
+<span class="material-symbols-outlined text-[16px]">call</span>
+<span class="">Llamar</span>
+</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1" for="provider">Obra Social / Prepaga</label>
+<input class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md px-space-md py-3 rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary shadow-inner" id="provider" type="text" value="PAMI (Instituto Nacional de Servicios Sociales)">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1" for="affiliateNumber">Número de Afiliado</label>
+<input class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md px-space-md py-3 rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary shadow-inner" id="affiliateNumber" type="text" value="150392819201 / 00">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1" for="physician">Médico de Cabecera</label>
+<input class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md px-space-md py-3 rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary shadow-inner" id="physician" type="text" value="Dr. Hernán Gutiérrez (Geriatría)">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1" for="physicianPhone">Teléfono / Consultorio</label>
+<div class="flex gap-space-xs">
+<input class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md px-space-md py-3 rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary shadow-inner" id="physicianPhone" type="text" value="+54 9 11 4982-3341">
+<a class="bg-surface-container-high hover:bg-surface-variant text-primary p-3 rounded-lg flex items-center justify-center transition-colors" href="tel:+5491149823341" title="Llamar al médico">
+<span class="material-symbols-outlined text-[20px]">call</span>
+</a>
+</div>
+</div>
+<div class="sm:col-span-2">
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1" for="hospitalClinic">Sanatorio / Hospital de Referencia</label>
+<input class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md px-space-md py-3 rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary shadow-inner" id="hospitalClinic" type="text" value="Hospital Italiano de Buenos Aires (Sede Central Almagro)">
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span class="">Carnet digital disponible en App PAMI</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Credencial Activa</span>
+</div>
+</section>
+<!-- Card 3: Condiciones de Salud y Antecedentes -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md md:p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-space-sm mb-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[24px]">clinical_notes</span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">3. Diagnósticos y Antecedentes</h2>
+</div>
+<span class="font-label-sm text-label-sm bg-surface-container px-space-xs py-0.5 rounded text-on-surface-variant font-medium">Clínica</span>
+</div>
+<!-- Active Diagnoses Tags List -->
+<div class="mb-space-md">
+<span class="block font-label-md text-label-md text-on-surface font-semibold mb-space-xs">Diagnósticos Activos</span>
+<div class="flex flex-wrap gap-space-xs">
+<span class="bg-surface-container px-space-sm py-1 rounded-full font-body-sm text-body-sm text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+                Hipertensión arterial esencial (HTA)
+              </span>
+<span class="bg-surface-container px-space-sm py-1 rounded-full font-body-sm text-body-sm text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+                Hipotiroidismo subclínico
+              </span>
+<span class="bg-surface-container px-space-sm py-1 rounded-full font-body-sm text-body-sm text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+                Artrosis leve en rodilla derecha
+              </span>
+<button class="text-primary font-label-sm text-label-sm flex items-center gap-0.5 px-2 py-1 rounded-full hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                Agregar diagnóstico
+              </button>
+</div>
+</div>
+<!-- Critical Allergies Callout Box -->
+<div class="mb-space-md bg-error-container/30 rounded-lg p-space-sm">
+<label class="block font-label-md text-label-md text-error font-bold mb-1 flex items-center gap-1" for="allergies">
+<span class="material-symbols-outlined text-[18px]">emergency_home</span>
+              Alergias Medicamentosas &amp; Reacciones Adversas (Crítico)
+            </label>
+<input class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md px-space-md py-2.5 rounded-lg focus:outline-none focus:ring-2 focus:ring-error shadow-inner" id="allergies" type="text" value="PENICILINA (Genera erupción cutánea y dificultad respiratoria severa). No tolera AINEs fuertes con el estómago vacío.">
+</div>
+<div class="flex flex-col gap-space-sm">
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1" for="surgeries">Cirugías Previas e Intervenciones</label>
+<textarea class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md px-space-md py-2.5 rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary shadow-inner" id="surgeries" rows="2">Colecistectomía laparoscópica (2014) • Cirugía de cataratas en ambos ojos con implante de lente intraocular (2021).</textarea>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1" for="observations">Observaciones Cardiovasculares / Marcapasos</label>
+<input class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md px-space-md py-2.5 rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary shadow-inner" id="observations" type="text" value="Sin prótesis metálicas ni marcapasos. Electrocardiograma anual en rango normal para la edad.">
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span class="">Último control clínico: 12 de Febrero 2024</span>
+<span class="font-label-sm text-label-sm text-primary">Historial al día</span>
+</div>
+</section>
+<!-- Card 4: Notas de Cuidado y Rutina Diaria -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md md:p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-space-sm mb-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[24px]">nightlight</span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">4. Rutinas y Preferencias de Cuidado</h2>
+</div>
+<span class="font-label-sm text-label-sm bg-tertiary-fixed text-on-tertiary-fixed font-bold px-space-xs py-0.5 rounded">Día a Día</span>
+</div>
+<div class="flex flex-col gap-space-md">
+<!-- Pill Intake Preferences (Key for eldercare) -->
+<div class="bg-surface-container-low p-space-sm rounded-lg">
+<label class="block font-label-md text-label-md text-on-surface font-bold mb-1 flex items-center gap-1" for="pillMethod">
+<span class="material-symbols-outlined text-primary text-[18px]">soup_kitchen</span>
+                Preferencia para Ingesta de Medicamentos
+              </label>
+<textarea class="w-full bg-surface-container-lowest text-on-surface font-body-md text-body-md px-space-md py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary shadow-inner" id="pillMethod" rows="2">Prefiere tomar los comprimidos grandes (como el calcio) acompañados de una cucharada de yogurt de vainilla o compota de manzana. Tomar con vaso completo de agua tibia.</textarea>
+<span class="text-on-surface-variant font-body-sm text-body-sm mt-1 block">Crucial para que no se atragante ni rechace la medicación matinal.</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1" for="sleepHabits">Hábitos de Sueño</label>
+<input class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md px-space-md py-2.5 rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary shadow-inner" id="sleepHabits" type="text" value="Duerme de 22:30 a 07:30 hs. Siesta breve de 14:00 a 15:00 hs.">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1" for="mobility">Nivel de Movilidad</label>
+<input class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md px-space-md py-2.5 rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary shadow-inner" id="mobility" type="text" value="Autónoma en interiores. Bastón de un punto para paseos y salidas.">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1" for="mealBreakfast">Desayuno habitual</label>
+<input class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md px-space-md py-2.5 rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary shadow-inner" id="mealBreakfast" type="text" value="08:30 hs (Té con leche y tostadas)">
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1" for="mealDinner">Cena habitual</label>
+<input class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md px-space-md py-2.5 rounded-lg focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary shadow-inner" id="mealDinner" type="text" value="20:30 hs (Comida liviana, sin sal agregada)">
+</div>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm flex items-center justify-between text-on-surface-variant font-body-sm text-body-sm">
+<span class="">Dieta hiposódica estricta indicada por cardiología</span>
+<span class="font-label-sm text-label-sm text-primary">Bien tolerado</span>
+</div>
+</section>
+</div>
+<!-- Family Care Network & Support Caregivers Banner -->
+<div class="bg-surface-container-low rounded-xl p-space-md md:p-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[26px]">group_add</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Red de Cuidados y Familia Compartida</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">¿Tenés un hermano, enfermero o acompañante terapéutico? Compartiles la ficha para que también puedan marcar tomas.</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm w-full md:w-auto shrink-0 justify-end">
+<div class="flex -space-x-2 overflow-hidden">
+<img alt="Carlos Ramos" class="inline-block h-8 w-8 rounded-full ring-2 ring-surface-container-lowest object-cover" data-alt="Friendly portrait of a 45-year-old Latin American man, brother and secondary caregiver, smiling softly." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnxOn9WheJlGxu8nFBMP-RsLuas86h5BW9xPno5B81Y8vUMX1HX4MDnD9Is0CgEMMetVA0I-egjgBfzOetgQIqlWRZvvjX_8x5mG7oesrM0GRhaFqBZfyAgu1ZxQ15gPTOnUx04kyxFz87dDeQT25wkaJcv8waJLihwGMGfXCDrdquHgS3qopMe4ZEQKWuklFhUsY9WXikt6h6AEKVGdk-cWGXUjRkWecCoyO6WmTu">
+<div class="h-8 w-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-sm text-label-sm ring-2 ring-surface-container-lowest font-bold">
+            +1
+          </div>
+</div>
+<button class="bg-surface-container-lowest hover:bg-surface-container-high text-primary font-label-md text-label-md px-space-md py-2 rounded-lg transition-colors shadow-sm flex items-center gap-1" onclick="alert('Enlace de invitación generado para WhatsApp. Podés compartirlo con el familiar de apoyo.');" type="button">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span class="">Vincular familiar</span>
+</button>
+</div>
+</div>
+<!-- Sticky / Prominent Action Bar -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-md flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">sync</span>
+<span class="">Última sincronización: Hoy a las 09:15 hs</span>
+</div>
+<div class="flex items-center gap-space-md w-full sm:w-auto">
+<button class="flex-1 sm:flex-initial px-space-lg py-3 rounded-lg text-on-surface-variant hover:bg-surface-container font-label-lg text-label-lg transition-colors text-center" onclick="if(confirm('¿Deseás descartar los cambios no guardados?')) location.reload();" type="button">
+          Cancelar
+        </button>
+<button class="flex-1 sm:flex-initial bg-primary hover:bg-primary-container text-on-primary px-space-xl py-3 rounded-lg font-label-lg text-label-lg font-bold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-space-xs active:scale-[0.98]" type="submit">
+<span class="material-symbols-outlined text-[20px]">save</span>
+<span class="">Guardar Cambios</span>
+</button>
+</div>
+</div>
+</form>
+<!-- Contextual Helper Card: Why having an updated elder profile matters -->
+<div class="mt-space-lg bg-surface-container/50 rounded-xl p-space-md flex items-start gap-space-md">
+<span class="material-symbols-outlined text-secondary text-[24px] mt-0.5">lightbulb</span>
+<div>
+<h4 class="font-label-lg text-label-lg text-on-surface font-semibold">Consejo de serenidad para cuidadoras</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+        Mantener al día el DNI, número de afiliado de PAMI y las alergias críticas permite imprimir de un solo toque la <strong class="text-on-surface">Ficha para el Médico</strong> antes de cada consulta presencial o ante cualquier ingreso inesperado a la guardia.
+      </p>
+</div>
+</div>
+</div>
+<script>
+  function triggerSave() {
+    const toast = document.getElementById('save-toast');
+    if (toast) {
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3500);
+    }
+  }
+</script></main><footer class="w-full bg-surface-container-low py-space-lg mt-space-xl shadow-[0_-1px_6px_rgba(0,0,0,0.02)]"><div class="max-w-[1120px] mx-auto px-gutter-desktop flex flex-col sm:flex-row items-center justify-between gap-space-md text-center sm:text-left"><div class="flex items-center gap-space-sm justify-center sm:justify-start"><span class="material-symbols-outlined text-primary text-[20px]">spa</span><p class="font-body-sm text-body-sm text-on-surface-variant">Cuidando con amor y tranquilidad. Cada toma a su debido tiempo.</p></div><div class="flex items-center gap-space-sm text-on-surface-variant font-label-sm text-label-sm"><span class="">CuidAR • Asistencia Familiar</span></div></div></footer>
+
+</body></html>
