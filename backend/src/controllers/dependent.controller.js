@@ -3,12 +3,28 @@ import dependentModel from '../models/dependent.model.js';
 import doctorModel from '../models/doctor.model.js';
 import doseModel from '../models/dose.model.js';
 import medicationModel from '../models/medication.model.js';
+import { isNonEmptyString, isValidDate } from '../utils/validators.js';
 
 function sendNotFound(res) {
   return res.status(404).json({
     status: 'error',
     data: { message: 'Persona a cargo no encontrada' }
   });
+}
+
+function sendBadRequest(res, message) {
+  return res.status(400).json({ status: 'error', data: { message } });
+}
+
+// Valida los campos presentes en el body, igual para POST y PATCH.
+function validateFields(body) {
+  if (Object.hasOwn(body, 'nombre_completo') && !isNonEmptyString(body.nombre_completo)) {
+    return 'nombre_completo debe ser un texto no vacío';
+  }
+  if (Object.hasOwn(body, 'fecha_nacimiento') && !isValidDate(body.fecha_nacimiento)) {
+    return 'fecha_nacimiento debe ser una fecha válida con formato YYYY-MM-DD';
+  }
+  return null;
 }
 
 async function getAll(req, res) {
@@ -26,17 +42,11 @@ async function getById(req, res) {
 async function create(req, res) {
   const body = req.body ?? {};
   // El modelo solo recibe solicitudes con los dos campos obligatorios.
-  if (
-    typeof body.nombre_completo !== 'string' ||
-    !body.nombre_completo.trim() ||
-    typeof body.fecha_nacimiento !== 'string' ||
-    !body.fecha_nacimiento.trim()
-  ) {
-    return res.status(400).json({
-      status: 'error',
-      data: { message: 'nombre_completo y fecha_nacimiento son obligatorios' }
-    });
+  if (!isNonEmptyString(body.nombre_completo) || !isNonEmptyString(body.fecha_nacimiento)) {
+    return sendBadRequest(res, 'nombre_completo y fecha_nacimiento son obligatorios');
   }
+  const fieldError = validateFields(body);
+  if (fieldError) return sendBadRequest(res, fieldError);
 
   const dependent = await dependentModel.create(body);
   return res.status(201).json({ status: 'success', data: dependent });
@@ -44,6 +54,9 @@ async function create(req, res) {
 
 async function update(req, res) {
   const body = req.body ?? {};
+  const fieldError = validateFields(body);
+  if (fieldError) return sendBadRequest(res, fieldError);
+
   const dependent = await dependentModel.update(req.params.id, body);
   if (!dependent) return sendNotFound(res);
 

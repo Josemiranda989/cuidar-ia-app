@@ -20,6 +20,16 @@ export function isValidDate(value) {
   );
 }
 
+// numeric(5,2) mayor que cero: hasta 999.99, con dos decimales como máximo.
+export function isValidAmount(value) {
+  return (
+    typeof value === 'number' &&
+    value > 0 &&
+    value <= 999.99 &&
+    Math.round(value * 100) / 100 === value
+  );
+}
+
 /**
  * Valida horarios: [{ hora: 'HH:MM', dias_semana?: [0..6] }].
  * Devuelve { error } o { value } normalizado (ordenado por hora, sin horas repetidas).

@@ -343,7 +343,8 @@ function MedicacionForm({ editingMed, onSaved, onCancelEdit }) {
               id="cantidad_por_toma"
               name="cantidad_por_toma"
               min="0.25"
-              step="any"
+              max="999.99"
+              step="0.01"
               value={form.cantidad_por_toma}
               onChange={handleChange}
               required

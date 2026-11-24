@@ -2,7 +2,12 @@ import dependentModel from '../models/dependent.model.js';
 import doctorModel from '../models/doctor.model.js';
 import doseModel from '../models/dose.model.js';
 import medicationModel from '../models/medication.model.js';
-import { parseHorarios } from '../utils/validators.js';
+import {
+  isNonEmptyString,
+  isValidAmount,
+  isValidDate,
+  parseHorarios
+} from '../utils/validators.js';
 
 const validForms = ['comprimido', 'gota', 'ml', 'aplicacion'];
 const validStates = ['activa', 'discontinuada'];
@@ -22,18 +27,40 @@ function sendNotFound(res) {
   });
 }
 
-function validateEnums(body) {
+// Valida los campos presentes en el body, igual para POST y PATCH.
+function validateFields(body) {
+  for (const field of ['droga', 'concentracion']) {
+    if (Object.hasOwn(body, field) && !isNonEmptyString(body[field])) {
+      return `${field} debe ser un texto no vacío`;
+    }
+  }
+  if (Object.hasOwn(body, 'cantidad_por_toma') && !isValidAmount(body.cantidad_por_toma)) {
+    return 'cantidad_por_toma debe ser un número mayor que 0, hasta 999.99 y con 2 decimales como máximo';
+  }
   if (
     Object.hasOwn(body, 'forma') &&
     (typeof body.forma !== 'string' || !validForms.includes(body.forma))
   ) {
     return 'forma debe ser uno de: comprimido, gota, ml, aplicacion';
   }
+  if (Object.hasOwn(body, 'es_sos') && typeof body.es_sos !== 'boolean') {
+    return 'es_sos debe ser true o false';
+  }
   if (
     Object.hasOwn(body, 'estado') &&
     (typeof body.estado !== 'string' || !validStates.includes(body.estado))
   ) {
     return 'estado debe ser uno de: activa, discontinuada';
+  }
+  if (Object.hasOwn(body, 'fecha_inicio') && !isValidDate(body.fecha_inicio)) {
+    return 'fecha_inicio debe ser una fecha válida con formato YYYY-MM-DD';
+  }
+  if (
+    Object.hasOwn(body, 'fecha_fin') &&
+    body.fecha_fin !== null &&
+    !isValidDate(body.fecha_fin)
+  ) {
+    return 'fecha_fin debe ser null o una fecha válida con formato YYYY-MM-DD';
   }
   return null;
 }
@@ -98,9 +125,9 @@ async function create(req, res) {
     });
   }
 
-  const enumError = validateEnums(body);
-  if (enumError) {
-    return res.status(400).json({ status: 'error', data: { message: enumError } });
+  const fieldError = validateFields(body);
+  if (fieldError) {
+    return res.status(400).json({ status: 'error', data: { message: fieldError } });
   }
   if (!(await validatePerson(body.persona_id))) {
     return res.status(400).json({
@@ -109,7 +136,7 @@ async function create(req, res) {
     });
   }
 
-  const relations = await prepareRelations(body, body.persona_id, Boolean(body.es_sos));
+  const relations = await prepareRelations(body, body.persona_id, body.es_sos ?? false);
   if (relations.error) {
     return res.status(400).json({ status: 'error', data: { message: relations.error } });
   }
@@ -120,9 +147,9 @@ async function create(req, res) {
 
 async function update(req, res) {
   const body = req.body ?? {};
-  const enumError = validateEnums(body);
-  if (enumError) {
-    return res.status(400).json({ status: 'error', data: { message: enumError } });
+  const fieldError = validateFields(body);
+  if (fieldError) {
+    return res.status(400).json({ status: 'error', data: { message: fieldError } });
   }
   if (Object.hasOwn(body, 'persona_id') && !(await validatePerson(body.persona_id))) {
     return res.status(400).json({
@@ -135,7 +162,7 @@ async function update(req, res) {
   if (!current) return sendNotFound(res);
 
   const personaId = body.persona_id ?? current.persona_id;
-  const esSos = Object.hasOwn(body, 'es_sos') ? Boolean(body.es_sos) : current.es_sos;
+  const esSos = Object.hasOwn(body, 'es_sos') ? body.es_sos : current.es_sos;
   // Si cambia la persona y no se manda medico_id, el médico anterior ya no corresponde.
   const relationsBody =
     personaId !== current.persona_id && !Object.hasOwn(body, 'medico_id')
