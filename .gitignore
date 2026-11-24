@@ -2,6 +2,9 @@
 # Dependencias
 node_modules/
 
+# Cliente de Prisma (se regenera con prisma generate)
+backend/src/generated/
+
 # Variables de entorno y secretos
 .env
 .env.*
