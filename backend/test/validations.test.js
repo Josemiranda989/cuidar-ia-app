@@ -1,5 +1,6 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
+import { ids, prisma, resetDb } from './test-db.js';
 import app from '../src/app.js';
 
 // PATCH tiene que respetar los mismos NOT NULL y tipos que POST (docs/modelo-datos.md).
@@ -7,13 +8,17 @@ let server;
 let baseUrl;
 
 before(async () => {
+  await resetDb();
   await new Promise((resolve) => {
     server = app.listen(0, resolve);
   });
   baseUrl = `http://127.0.0.1:${server.address().port}/api`;
 });
 
-after(() => new Promise((resolve) => server.close(resolve)));
+after(async () => {
+  await new Promise((resolve) => server.close(resolve));
+  await prisma.$disconnect();
+});
 
 async function api(method, path, body) {
   const res = await fetch(`${baseUrl}${path}`, {
@@ -30,7 +35,7 @@ async function api(method, path, body) {
 }
 
 const baseMedication = {
-  persona_id: 'elsa-01',
+  persona_id: ids.elsa,
   droga: 'atorvastatina',
   concentracion: '20 mg',
   cantidad_por_toma: 1,
@@ -68,14 +73,14 @@ for (const [field, value] of invalidMedicationFields) {
     const created = await api('POST', '/medications', { ...baseMedication, [field]: value });
     assert.equal(created.status, 400);
 
-    const original = await api('GET', '/medications/med-elsa-01');
-    const patched = await api('PATCH', '/medications/med-elsa-01', { [field]: value });
+    const original = await api('GET', `/medications/${ids.enalapril}`);
+    const patched = await api('PATCH', `/medications/${ids.enalapril}`, { [field]: value });
     assert.equal(patched.status, 400);
     assert.equal(patched.body.status, 'error');
     assert.ok(patched.body.data.message.includes(field));
 
     // Un PATCH rechazado no modifica nada.
-    const current = await api('GET', '/medications/med-elsa-01');
+    const current = await api('GET', `/medications/${ids.enalapril}`);
     assert.deepEqual(current.body.data, original.body.data);
   });
 }
@@ -89,14 +94,14 @@ test('medications: acepta los valores límite de cantidad_por_toma', async () =>
 });
 
 test('medications: discontinuar y reactivar sigue funcionando', async () => {
-  const off = await api('PATCH', '/medications/med-elsa-02', {
+  const off = await api('PATCH', `/medications/${ids.levotiroxina}`, {
     estado: 'discontinuada',
     fecha_fin: '2026-11-24'
   });
   assert.equal(off.status, 200);
   assert.equal(off.body.data.fecha_fin, '2026-11-24');
 
-  const on = await api('PATCH', '/medications/med-elsa-02', {
+  const on = await api('PATCH', `/medications/${ids.levotiroxina}`, {
     estado: 'activa',
     fecha_fin: null,
     motivo_baja: null
@@ -106,7 +111,7 @@ test('medications: discontinuar y reactivar sigue funcionando', async () => {
 });
 
 test('medications: POST informa todos los obligatorios que faltan', async () => {
-  const { status, body } = await api('POST', '/medications', { persona_id: 'elsa-01' });
+  const { status, body } = await api('POST', '/medications', { persona_id: ids.elsa });
   assert.equal(status, 400);
   for (const field of ['droga', 'concentracion', 'cantidad_por_toma', 'forma', 'fecha_inicio']) {
     assert.ok(body.data.message.includes(field));
@@ -128,21 +133,21 @@ for (const [field, value] of invalidPersonFields) {
     const created = await api('POST', '/dependents', { ...basePerson, [field]: value });
     assert.equal(created.status, 400);
 
-    const patched = await api('PATCH', '/dependents/otro-99', { [field]: value });
+    const patched = await api('PATCH', `/dependents/${ids.otra}`, { [field]: value });
     assert.equal(patched.status, 400);
     assert.ok(patched.body.data.message.includes(field));
 
     // Antes, una fecha nula dejaba GET /dependents en 500.
     const list = await api('GET', '/dependents');
     assert.equal(list.status, 200);
-    const person = list.body.data.find((item) => item.id === 'otro-99');
+    const person = list.body.data.find((item) => item.id === ids.otra);
     assert.equal(person.nombre_completo, 'Otra persona');
     assert.equal(person.fecha_nacimiento, '1955-01-01');
   });
 }
 
 test('dependents: PATCH parcial válido y opcionales en null siguen funcionando', async () => {
-  const { status, body } = await api('PATCH', '/dependents/otro-99', { dni: null, notas: 'Nota' });
+  const { status, body } = await api('PATCH', `/dependents/${ids.otra}`, { dni: null, notas: 'Nota' });
   assert.equal(status, 200);
   assert.equal(body.data.notas, 'Nota');
   assert.equal(body.data.nombre_completo, 'Otra persona');

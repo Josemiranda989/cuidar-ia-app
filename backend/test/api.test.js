@@ -1,19 +1,24 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
+import { ids, prisma, resetDb } from './test-db.js';
 import app from '../src/app.js';
 
-// Los modelos viven en memoria y se comparten en el proceso: los tests van en orden.
+// La base se comparte entre los tests: van en orden.
 let server;
 let baseUrl;
 
 before(async () => {
+  await resetDb();
   await new Promise((resolve) => {
     server = app.listen(0, resolve);
   });
   baseUrl = `http://127.0.0.1:${server.address().port}/api`;
 });
 
-after(() => new Promise((resolve) => server.close(resolve)));
+after(async () => {
+  await new Promise((resolve) => server.close(resolve));
+  await prisma.$disconnect();
+});
 
 async function api(method, path, body) {
   const res = await fetch(`${baseUrl}${path}`, {
@@ -25,7 +30,7 @@ async function api(method, path, body) {
 }
 
 const basePayload = {
-  persona_id: 'elsa-01',
+  persona_id: ids.elsa,
   droga: 'atorvastatina',
   concentracion: '20 mg',
   cantidad_por_toma: 1,
@@ -34,19 +39,19 @@ const basePayload = {
 };
 
 test('GET /medications embebe horarios y médico', async () => {
-  const { status, body } = await api('GET', '/medications/med-elsa-01');
+  const { status, body } = await api('GET', `/medications/${ids.enalapril}`);
   assert.equal(status, 200);
   assert.deepEqual(
     body.data.horarios.map((h) => h.hora),
     ['08:00']
   );
-  assert.equal(body.data.medico.id, 'medico-elsa-01');
+  assert.equal(body.data.medico.id, ids.medico);
 });
 
 test('POST /medications guarda horarios ordenados y medico_id', async () => {
   const { status, body } = await api('POST', '/medications', {
     ...basePayload,
-    medico_id: 'medico-elsa-01',
+    medico_id: ids.medico,
     horarios: [{ hora: '21:30' }, { hora: '09:00', dias_semana: [1, 3, 5] }]
   });
   assert.equal(status, 201);
@@ -57,7 +62,7 @@ test('POST /medications guarda horarios ordenados y medico_id', async () => {
       ['21:30', [0, 1, 2, 3, 4, 5, 6]]
     ]
   );
-  assert.equal(body.data.medico_id, 'medico-elsa-01');
+  assert.equal(body.data.medico_id, ids.medico);
 });
 
 test('POST /medications rechaza hora inválida, horas repetidas y SOS con horarios', async () => {
@@ -79,7 +84,7 @@ test('POST /medications rechaza hora inválida, horas repetidas y SOS con horari
 });
 
 test('POST /medications rechaza un médico de otra persona', async () => {
-  const doctor = await api('POST', '/doctors', { persona_id: 'otro-99', nombre: 'Dr. Ajeno' });
+  const doctor = await api('POST', '/doctors', { persona_id: ids.otra, nombre: 'Dr. Ajeno' });
   assert.equal(doctor.status, 201);
 
   const { status } = await api('POST', '/medications', {
@@ -90,23 +95,23 @@ test('POST /medications rechaza un médico de otra persona', async () => {
 });
 
 test('PATCH /medications conserva medico_id (antes se pisaba con null)', async () => {
-  const { status, body } = await api('PATCH', '/medications/med-elsa-01', { estado: 'activa' });
+  const { status, body } = await api('PATCH', `/medications/${ids.enalapril}`, { estado: 'activa' });
   assert.equal(status, 200);
-  assert.equal(body.data.medico_id, 'medico-elsa-01');
+  assert.equal(body.data.medico_id, ids.medico);
 });
 
 test('PATCH /medications conserva el id del horario que mantiene la hora', async () => {
-  const before = await api('GET', '/medications/med-elsa-01');
+  const before = await api('GET', `/medications/${ids.enalapril}`);
   const originalId = before.body.data.horarios[0].id;
 
-  const { body } = await api('PATCH', '/medications/med-elsa-01', {
+  const { body } = await api('PATCH', `/medications/${ids.enalapril}`, {
     horarios: [{ hora: '08:00' }, { hora: '20:00' }]
   });
   assert.equal(body.data.horarios.find((h) => h.hora === '08:00').id, originalId);
   assert.equal(body.data.horarios.length, 2);
 
   // dejamos el seed como estaba
-  await api('PATCH', '/medications/med-elsa-01', { horarios: [{ hora: '08:00' }] });
+  await api('PATCH', `/medications/${ids.enalapril}`, { horarios: [{ hora: '08:00' }] });
 });
 
 test('PATCH /medications a SOS borra los horarios', async () => {
@@ -117,14 +122,14 @@ test('PATCH /medications a SOS borra los horarios', async () => {
 
 test('doctors: CRUD y DELETE deja medico_id en null', async () => {
   const created = await api('POST', '/doctors', {
-    persona_id: 'elsa-01',
+    persona_id: ids.elsa,
     nombre: 'Dr. Temporal',
     especialidad: 'Cardiología'
   });
   assert.equal(created.status, 201);
   const doctorId = created.body.data.id;
 
-  const list = await api('GET', '/doctors?personaId=elsa-01');
+  const list = await api('GET', `/doctors?personaId=${ids.elsa}`);
   assert.ok(list.body.data.some((d) => d.id === doctorId));
 
   const med = await api('POST', '/medications', { ...basePayload, medico_id: doctorId });
@@ -136,16 +141,16 @@ test('doctors: CRUD y DELETE deja medico_id en null', async () => {
 });
 
 test('doctors: valida obligatorios y no permite mover de persona', async () => {
-  assert.equal((await api('POST', '/doctors', { persona_id: 'elsa-01' })).status, 400);
+  assert.equal((await api('POST', '/doctors', { persona_id: ids.elsa })).status, 400);
   assert.equal(
-    (await api('PATCH', '/doctors/medico-elsa-01', { persona_id: 'otro-99' })).status,
+    (await api('PATCH', `/doctors/${ids.medico}`, { persona_id: ids.otra })).status,
     400
   );
 });
 
 test('conditions: crea diagnóstico y alergia, valida tipo', async () => {
   const allergy = await api('POST', '/conditions', {
-    persona_id: 'elsa-01',
+    persona_id: ids.elsa,
     tipo: 'alergia',
     descripcion: '  Penicilina  '
   });
@@ -153,13 +158,13 @@ test('conditions: crea diagnóstico y alergia, valida tipo', async () => {
   assert.equal(allergy.body.data.descripcion, 'Penicilina');
 
   const badType = await api('POST', '/conditions', {
-    persona_id: 'elsa-01',
+    persona_id: ids.elsa,
     tipo: 'sintoma',
     descripcion: 'Tos'
   });
   assert.equal(badType.status, 400);
 
-  const list = await api('GET', '/conditions?personaId=elsa-01');
+  const list = await api('GET', `/conditions?personaId=${ids.elsa}`);
   assert.ok(list.body.data.some((c) => c.tipo === 'alergia'));
 
   const removed = await api('DELETE', `/conditions/${allergy.body.data.id}`);
@@ -168,16 +173,16 @@ test('conditions: crea diagnóstico y alergia, valida tipo', async () => {
 
 test('doses: registrar, corregir (upsert), listar por día y deshacer', async () => {
   const first = await api('POST', '/doses', {
-    horario_id: 'hor-elsa-01',
+    horario_id: ids.horarioEnalapril,
     fecha: '2026-11-20',
     estado: 'tomada'
   });
   assert.equal(first.status, 201);
   assert.equal(first.body.data.hora_programada, '08:00');
-  assert.equal(first.body.data.medicacion_id, 'med-elsa-01');
+  assert.equal(first.body.data.medicacion_id, ids.enalapril);
 
   const corrected = await api('POST', '/doses', {
-    horario_id: 'hor-elsa-01',
+    horario_id: ids.horarioEnalapril,
     fecha: '2026-11-20',
     estado: 'omitida'
   });
@@ -185,10 +190,10 @@ test('doses: registrar, corregir (upsert), listar por día y deshacer', async ()
   assert.equal(corrected.body.data.id, first.body.data.id);
   assert.equal(corrected.body.data.estado, 'omitida');
 
-  const day = await api('GET', '/doses?personaId=elsa-01&fecha=2026-11-20');
+  const day = await api('GET', `/doses?personaId=${ids.elsa}&fecha=2026-11-20`);
   assert.equal(day.body.data.length, 1);
 
-  const otherPerson = await api('GET', '/doses?personaId=otro-99&fecha=2026-11-20');
+  const otherPerson = await api('GET', `/doses?personaId=${ids.otra}&fecha=2026-11-20`);
   assert.equal(otherPerson.body.data.length, 0);
 
   const undone = await api('DELETE', `/doses/${first.body.data.id}`);
@@ -197,7 +202,7 @@ test('doses: registrar, corregir (upsert), listar por día y deshacer', async ()
 });
 
 test('doses: valida horario, fecha y estado', async () => {
-  const base = { horario_id: 'hor-elsa-01', fecha: '2026-11-20', estado: 'tomada' };
+  const base = { horario_id: ids.horarioEnalapril, fecha: '2026-11-20', estado: 'tomada' };
   assert.equal((await api('POST', '/doses', { ...base, horario_id: 'nope' })).status, 400);
   assert.equal((await api('POST', '/doses', { ...base, fecha: '2026-02-30' })).status, 400);
   assert.equal((await api('POST', '/doses', { ...base, estado: 'pospuesta' })).status, 400);

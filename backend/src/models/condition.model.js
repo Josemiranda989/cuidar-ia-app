@@ -1,66 +1,40 @@
-import { randomUUID } from 'node:crypto';
+import prisma from '../lib/prisma.js';
+import { isUuid, nullIfNotFound, parseRaw, parseText, toChanges, toRow } from '../lib/serialize.js';
 
-const editableFields = ['persona_id', 'tipo', 'descripcion'];
-
-const conditions = [
-  {
-    id: 'cond-elsa-01',
-    persona_id: 'elsa-01',
-    tipo: 'diagnostico',
-    descripcion: 'Hipertensión'
-  },
-  {
-    id: 'cond-elsa-02',
-    persona_id: 'elsa-01',
-    tipo: 'diagnostico',
-    descripcion: 'Hipotiroidismo'
-  }
-];
+const columns = {
+  persona_id: parseRaw,
+  tipo: parseRaw,
+  descripcion: parseText
+};
 
 async function getAll(personaId) {
-  const result = personaId
-    ? conditions.filter((condition) => condition.persona_id === personaId)
-    : conditions;
-  return result.map((condition) => ({ ...condition }));
+  if (personaId && !isUuid(personaId)) return [];
+  return prisma.condicion.findMany({
+    where: personaId ? { persona_id: personaId } : {},
+    orderBy: { id: 'asc' }
+  });
 }
 
 async function getById(id) {
-  const condition = conditions.find((item) => item.id === id);
-  return condition ? { ...condition } : null;
+  if (!isUuid(id)) return null;
+  return prisma.condicion.findUnique({ where: { id } });
 }
 
 async function create(data) {
-  const condition = Object.fromEntries(
-    editableFields.map((field) => [field, data[field] ?? null])
-  );
-  condition.id = randomUUID();
-  conditions.push(condition);
-  return { ...condition };
+  return prisma.condicion.create({ data: toRow(columns, data) });
 }
 
 async function update(id, data) {
-  const condition = conditions.find((item) => item.id === id);
-  if (!condition) return null;
-
-  for (const field of editableFields) {
-    if (Object.hasOwn(data, field)) condition[field] = data[field];
-  }
-  return { ...condition };
+  if (!isUuid(id)) return null;
+  return nullIfNotFound(prisma.condicion.update({ where: { id }, data: toChanges(columns, data) }));
 }
 
 async function remove(id) {
-  const index = conditions.findIndex((item) => item.id === id);
-  if (index === -1) return null;
-
-  const [condition] = conditions.splice(index, 1);
-  return { ...condition };
+  if (!isUuid(id)) return null;
+  return nullIfNotFound(prisma.condicion.delete({ where: { id } }));
 }
 
-// ON DELETE CASCADE desde persona_a_cargo.
-async function removeByPersona(personaId) {
-  for (let i = conditions.length - 1; i >= 0; i -= 1) {
-    if (conditions[i].persona_id === personaId) conditions.splice(i, 1);
-  }
-}
+// Lo resuelve Postgres (ON DELETE CASCADE desde persona_a_cargo).
+async function removeByPersona(personaId) {}
 
 export default { getAll, getById, create, update, remove, removeByPersona };

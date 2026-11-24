@@ -1,5 +1,6 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
+import { prisma } from './test-db.js';
 import app from '../src/app.js';
 import conditionRoutes from '../src/routes/condition.routes.js';
 import dependentRoutes from '../src/routes/dependent.routes.js';
@@ -40,7 +41,10 @@ before(async () => {
   baseUrl = `http://127.0.0.1:${server.address().port}`;
 });
 
-after(() => new Promise((resolve) => server.close(resolve)));
+after(async () => {
+  await new Promise((resolve) => server.close(resolve));
+  await prisma.$disconnect();
+});
 
 async function getIndex() {
   const res = await fetch(`${baseUrl}/`);
