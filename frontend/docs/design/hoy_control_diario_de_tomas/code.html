@@ -1,0 +1,350 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title>CuidAR</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-container-high":"#dee8ff","primary-container":"#0d766e","background":"#f9f9ff","tertiary-fixed":"#ffdcc3","surface-variant":"#d8e3fb","on-tertiary-container":"#ffe5d3","on-secondary-fixed":"#00201c","tertiary-container":"#a05600","secondary-fixed":"#71f8e4","on-secondary-fixed-variant":"#005048","on-surface":"#111c2d","on-tertiary-fixed-variant":"#6e3900","tertiary-fixed-dim":"#ffb77d","outline":"#6e7977","on-error":"#ffffff","surface-tint":"#006a63","on-primary":"#ffffff","error":"#ba1a1a","surface-container-highest":"#d8e3fb","on-secondary":"#ffffff","tertiary":"#7d4200","surface-container-lowest":"#ffffff","secondary-container":"#6df5e1","on-background":"#111c2d","inverse-on-surface":"#ecf1ff","surface-container-low":"#f0f3ff","surface":"#f9f9ff","on-primary-fixed-variant":"#00504a","error-container":"#ffdad6","secondary":"#006b5f","primary":"#005c55","secondary-fixed-dim":"#4fdbc8","surface-container":"#e7eeff","surface-dim":"#cfdaf2","primary-fixed-dim":"#7fd5cc","inverse-primary":"#7fd5cc","inverse-surface":"#263143","surface-bright":"#f9f9ff","on-surface-variant":"#3e4947","on-tertiary":"#ffffff","on-primary-fixed":"#00201d","outline-variant":"#bdc9c6","primary-fixed":"#9bf2e8","on-error-container":"#93000a","on-secondary-container":"#006f64","on-tertiary-fixed":"#2f1500","on-primary-container":"#a3faef"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xs":"0.25rem","gutter-desktop":"1.5rem",margin:"1rem","margin-desktop":"2.5rem","space-xl":"2rem","space-md":"1rem","space-sm":"0.5rem",gutter:"1rem","space-lg":"1.5rem","margin-tablet":"1.5rem","gutter-tablet":"1.25rem"},fontFamily:{"label-sm":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"time-display":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"]},fontSize:{"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.04em",fontWeight:"700"}],"label-lg":["15px",{lineHeight:"20px",letterSpacing:"0.01em",fontWeight:"600"}],"time-display":["28px",{lineHeight:"32px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-md":["15px",{lineHeight:"24px",fontWeight:"400"}],"headline-md":["20px",{lineHeight:"28px",fontWeight:"600"}],"display-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"700"}],"label-md":["13px",{lineHeight:"18px",letterSpacing:"0.02em",fontWeight:"600"}],"body-sm":["13px",{lineHeight:"20px",fontWeight:"400"}],"headline-sm":["18px",{lineHeight:"26px",fontWeight:"600"}],"headline-lg-mobile":["22px",{lineHeight:"30px",letterSpacing:"-0.01em",fontWeight:"700"}],"body-lg":["17px",{lineHeight:"26px",fontWeight:"400"}],"headline-lg":["26px",{lineHeight:"34px",letterSpacing:"-0.015em",fontWeight:"700"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 w-full px-gutter-desktop max-w-[1120px] mx-auto flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md min-w-0"><div class="flex items-center gap-space-sm shrink-0"><img alt="CuidAR Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1V7dUT1xhtGuPjG8_ulTUuK4ZYzQUplLH98CD8LXINlQISxjMt_QBizAZLNaN5i83ECiEvgTm5h-SjXrun0QJEfMpviOfKTw0Ez-8fNY1v_auEggfaLtNNUTyBYlmtJ9ts7I4uhCgK1ETBgFw5DrU6MJrAS7630fpRKTkR8b07pqUi47Q4EZoIw-qTRoZpt-0Vz_Ffh6HrByL4nnvoLIYMdxoSThZB3ZTkQqTihHJyX"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-semibold">CuidAR</span></div><div class="hidden sm:flex items-center gap-space-xs bg-surface-container px-space-md py-space-xs rounded-full shadow-[0_1px_4px_rgba(0,0,0,0.02)]"><span class="material-symbols-outlined text-primary text-[18px]">favorite</span><span class="font-label-md text-label-md text-on-surface font-semibold">Cuidando a: Elsa (81 años)</span></div></div><div class="flex items-center gap-space-md shrink-0"><button class="hidden md:flex items-center gap-space-xs bg-error-container hover:bg-error/20 text-on-error-container px-space-md py-space-xs rounded-full font-label-md text-label-md transition-colors" type="button"><span class="material-symbols-outlined text-error text-[18px]">emergency</span><span class="">Teléfono de Urgencias</span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="text-right hidden sm:block"><span class="block font-label-md text-label-md text-on-surface">Marina</span><span class="block font-label-sm text-label-sm text-on-surface-variant font-normal">Cuidadora Principal</span></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn1lcJnhTnlTwq1E2KiT4VYwJFGda8S8Np6HHzccJo4xjS_AdEQyQ1ndZqsNujsdjykyv7dyv2iGrOQ8G1UJGZ4CimA7_5ygAZwAM_hbO5ipkwU5egJdv6z_f3EW3VoXd9lXpqJ8cL1I9U-Uso60WOhqM7N4Jx_1MN9n4ZHXgaDjhFKtbIMFDxw4rcpfx9RvKmXIFwp6jhJmkYkQThu6s5cZ7Fidnqzntp9wEfBjgw"></div></div></div><div class="w-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.02)]"><div class="max-w-[1120px] mx-auto px-gutter-desktop"><nav class="flex items-center gap-space-xs py-space-xs overflow-x-auto" data-active-classes="bg-primary-container text-on-primary font-bold"><a aria-current="page" class="px-space-md py-space-sm rounded-lg transition-colors whitespace-nowrap bg-primary-container text-on-primary font-bold" data-path="hoy" href="#">Hoy</a><a class="px-space-md py-space-sm rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors whitespace-nowrap" data-path="vademecum" href="#">Vademécum</a><a class="px-space-md py-space-sm rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors whitespace-nowrap" data-path="ficha-medica" href="#">Ficha para el Médico</a><a class="px-space-md py-space-sm rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors whitespace-nowrap" data-path="perfil-elsa" href="#">Ficha de Elsa</a></nav></div></div></header><main class="w-full pt-32 max-w-[1120px] mx-auto px-gutter-desktop flex-1"><div class="flex flex-col w-full">
+<div class="flex flex-col gap-space-lg">
+<!-- Top Context & Date Selector Bar -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md sm:p-space-lg shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span class="">Jueves, 24 de Octubre de 2024</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Plan Diario de Elsa</h1>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-space-xs">
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="">Vas al día: <strong class="text-on-surface font-semibold" id="progress-summary">3 de 4 tomas registradas hoy</strong></span>
+</p>
+</div>
+<!-- Quick Day Nav Pill -->
+<div class="flex items-center bg-surface-container-low p-space-xs rounded-full self-start md:self-center">
+<button class="px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" type="button">Ayer</button>
+<button class="px-space-md py-space-xs rounded-full font-label-md text-label-md bg-primary text-on-primary shadow-sm font-bold" type="button">Hoy</button>
+<button class="px-space-md py-space-xs rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" type="button">Mañana</button>
+</div>
+</div>
+<!-- Main 12-Column Responsive Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Primary Column: Chronological Intake Timeline (8 Cols) -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<!-- Progress Bar Meter -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-xs">
+<div class="flex justify-between items-center text-on-surface">
+<span class="font-label-md text-label-md font-semibold">Progreso de cuidados hoy</span>
+<span class="font-label-md text-label-md text-primary font-bold" id="progress-pct">75%</span>
+</div>
+<div class="w-full bg-surface-container-high h-2.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full transition-all duration-500 ease-out" id="progress-bar" style="width: 75%;"></div>
+</div>
+</div>
+<!-- TIMELINE ITEM 1: Mañana (COMPLETED) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md sm:p-space-lg shadow-sm flex flex-col gap-space-md relative overflow-hidden transition-all">
+<div class="flex items-center justify-between flex-wrap gap-space-sm pb-space-sm border-b border-surface-container-high/60">
+<div class="flex items-center gap-space-sm">
+<span class="flex items-center justify-center w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined text-[22px]">wb_sunny</span>
+</span>
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface block">Mañana</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Programada: 08:00 hs</span>
+</div>
+</div>
+<!-- Completed Badge -->
+<div class="flex items-center gap-space-xs bg-secondary-container/40 text-on-secondary-container px-space-md py-space-xs rounded-full">
+<span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span>
+<span class="font-label-md text-label-md font-bold">Administrada a las 08:15 hs</span>
+</div>
+</div>
+<!-- Dose Cards Inside Mañana -->
+<div class="flex flex-col gap-space-sm">
+<div class="bg-surface-container-low rounded-lg p-space-md flex items-start justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<span class="material-symbols-outlined text-primary text-[24px] mt-0.5">medication</span>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Enalapril 10 mg</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-space-xs py-0.5 rounded">1 comprimido</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Con el desayuno • Recetado por Dr. Morales para la presión arterial.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary text-[22px] shrink-0" title="Verificado">done_all</span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-space-md flex items-start justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<span class="material-symbols-outlined text-primary text-[24px] mt-0.5">medication</span>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Levotiroxina 50 mcg</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-space-xs py-0.5 rounded">1 comprimido</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Tomar en ayunas con vaso completo de agua tibia.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary text-[22px] shrink-0" title="Verificado">done_all</span>
+</div>
+</div>
+</div>
+<!-- TIMELINE ITEM 2: Mediodía (COMPLETED) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md sm:p-space-lg shadow-sm flex flex-col gap-space-md relative overflow-hidden transition-all">
+<div class="flex items-center justify-between flex-wrap gap-space-sm pb-space-sm border-b border-surface-container-high/60">
+<div class="flex items-center gap-space-sm">
+<span class="flex items-center justify-center w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined text-[22px]">restaurant</span>
+</span>
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface block">Mediodía / Almuerzo</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Programada: 13:00 hs</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs bg-secondary-container/40 text-on-secondary-container px-space-md py-space-xs rounded-full">
+<span class="material-symbols-outlined text-[18px] text-secondary">check_circle</span>
+<span class="font-label-md text-label-md font-bold">Administrada a las 13:10 hs</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-space-md flex items-start justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<span class="material-symbols-outlined text-primary text-[24px] mt-0.5">vital_signs</span>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Calcio + Vitamina D</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-space-xs py-0.5 rounded">1 comprimido masticable</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Masticar bien durante el almuerzo. Refuerzo óseo sugerido por Reumatología.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary text-[22px] shrink-0" title="Verificado">done_all</span>
+</div>
+</div>
+<!-- TIMELINE ITEM 3: Tarde / Merienda (PRÓXIMA TOMA - ACTIVE FOCUS CARD) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md sm:p-space-lg shadow-lg flex flex-col gap-space-md relative overflow-hidden transition-all ring-2 ring-primary" id="card-tarde">
+<!-- Teal accent indicator bar -->
+<div class="absolute left-0 top-0 bottom-0 w-2 bg-primary"></div>
+<div class="flex items-center justify-between flex-wrap gap-space-sm pl-space-xs pb-space-sm border-b border-surface-container-high/60">
+<div class="flex items-center gap-space-sm">
+<span class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-container text-on-primary">
+<span class="material-symbols-outlined text-[22px]">schedule</span>
+</span>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">Tarde / Merienda</span>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm px-space-xs py-0.5 rounded-full font-bold animate-pulse">Toca ahora</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Hora programada: 17:00 hs</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs bg-tertiary-fixed/60 text-on-tertiary-fixed px-space-md py-space-xs rounded-full">
+<span class="material-symbols-outlined text-[18px]">alarm</span>
+<span class="font-label-md text-label-md font-bold">Turno actual</span>
+</div>
+</div>
+<!-- Dose Content -->
+<div class="bg-surface-container-low/70 rounded-lg p-space-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md ml-space-xs">
+<div class="flex items-start gap-space-md">
+<span class="material-symbols-outlined text-primary text-[28px] mt-0.5">visibility</span>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">Gotas oftálmicas lubricantes</span>
+<span class="font-label-sm text-label-sm text-primary font-bold bg-secondary-fixed/30 text-on-secondary-fixed px-space-sm py-0.5 rounded-full">2 gotas • Ojo derecho</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Lágrimas artificiales sin conservantes. Agitar suavemente antes de aplicar.</p>
+</div>
+</div>
+</div>
+<!-- Big Reassuring Action Button for Marina -->
+<div class="flex flex-col sm:flex-row items-center gap-space-sm pt-space-xs ml-space-xs" id="tarde-actions">
+<button class="w-full sm:flex-1 h-14 bg-primary hover:bg-primary-container text-on-primary rounded-xl font-label-lg text-label-lg flex items-center justify-center gap-space-sm shadow-md transition-all active:scale-[0.98]" id="btn-confirm-tarde" type="button">
+<span class="material-symbols-outlined text-[24px]">check_circle</span>
+<span class="">Marcar como administrada con 1 toque</span>
+</button>
+<button class="w-full sm:w-auto px-space-lg h-14 bg-surface-container hover:bg-surface-container-high text-primary rounded-xl font-label-md text-label-md flex items-center justify-center gap-space-xs transition-colors" id="btn-snooze-tarde" type="button">
+<span class="material-symbols-outlined text-[18px]">snooze</span>
+<span class="">Posponer 15 min</span>
+</button>
+</div>
+<!-- Interactive Success Confirmation State (Hidden initially) -->
+<div class="hidden flex-col items-center justify-center p-space-md bg-secondary-container/30 rounded-xl text-center gap-space-xs ml-space-xs" id="tarde-success">
+<div class="w-12 h-12 rounded-full bg-secondary text-on-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">check</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">¡Excelente, Marina! Toma registrada.</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Quedó asentada a las 17:02 hs. Todo bajo control.</p>
+</div>
+</div>
+<!-- TIMELINE ITEM 4: Noche (PENDING) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md sm:p-space-lg shadow-sm flex flex-col gap-space-md relative overflow-hidden transition-all opacity-85" id="card-noche">
+<div class="flex items-center justify-between flex-wrap gap-space-sm pb-space-sm border-b border-surface-container-high/60">
+<div class="flex items-center gap-space-sm">
+<span class="flex items-center justify-center w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant">
+<span class="material-symbols-outlined text-[22px]">nights_stay</span>
+</span>
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface block">Noche / Antes de dormir</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Programada: 21:30 hs</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container text-on-surface-variant px-space-md py-space-xs rounded-full">
+<span class="material-symbols-outlined text-[18px]">hourglass_empty</span>
+<span class="font-label-md text-label-md">Pendiente</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-space-md flex items-start justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<span class="material-symbols-outlined text-outline text-[24px] mt-0.5">medication</span>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-label-lg text-label-lg text-on-surface font-bold">Atorvastatina 20 mg</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-space-xs py-0.5 rounded">1 comprimido</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Control de colesterol. Ingerir con medio vaso de agua al acostarse.</p>
+</div>
+</div>
+<button class="px-space-md py-space-xs bg-surface-container-highest hover:bg-primary hover:text-on-primary text-on-surface font-label-sm text-label-sm rounded-lg transition-colors shrink-0" id="btn-quick-noche" type="button">
+              Anticipar toma
+            </button>
+</div>
+</div>
+</div>
+<!-- Secondary Column: Caregiver Diary, Patient Vitals & Direct Shortcuts (4 Cols) -->
+<div class="lg:col-span-4 flex flex-col gap-space-lg">
+<!-- Caregiver Day Notes Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs text-primary font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="">Bitácora de hoy</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-space-xs py-0.5 rounded">Guardado</span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-space-md text-on-surface">
+<div class="flex items-start gap-space-sm mb-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">sentiment_satisfied</span>
+<span class="font-label-md text-label-md font-bold">Estado general de Elsa</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface italic" id="note-display">
+              "Hoy Elsa amaneció con muy buen ánimo, durmió 7 horas seguidas y caminó 15 minutos en el jardín sin agitarse."
+            </p>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="new-observation">Añadir nueva observación o síntoma:</label>
+<div class="flex gap-space-xs">
+<input class="flex-1 bg-surface-container-lowest border border-outline-variant rounded-lg px-space-sm py-space-xs font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary" id="new-observation" placeholder="Ej. Tomó 1 litro de agua, apetito normal..." type="text">
+<button class="bg-primary hover:bg-primary-container text-on-primary px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-colors flex items-center justify-center shrink-0" id="btn-save-note" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Quick Emergency & Doctor Contacts Snapshot -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center gap-space-xs text-on-surface font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined text-primary">contacts</span>
+<span class="">Contactos de Salud</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between p-space-sm bg-surface-container-low rounded-lg">
+<div>
+<span class="font-label-md text-label-md font-bold text-on-surface block">Dr. Roberto Morales</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Médico Clínico de Cabecera</span>
+</div>
+<a class="w-9 h-9 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center hover:opacity-90 transition-opacity" href="tel:+5491145678900" title="Llamar al médico">
+<span class="material-symbols-outlined text-[20px]">phone</span>
+</a>
+</div>
+<div class="flex items-center justify-between p-space-sm bg-surface-container-low rounded-lg">
+<div>
+<span class="font-label-md text-label-md font-bold text-on-surface block">Emergencias OSDE</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Afiliada Nº 45-891024-01</span>
+</div>
+<a class="w-9 h-9 rounded-full bg-error-container text-on-error-container flex items-center justify-center hover:opacity-90 transition-opacity" href="tel:08105556733" title="Llamada de urgencia">
+<span class="material-symbols-outlined text-[20px]">call</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Useful Shortcuts to Vademécum & Printable Medical Form -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<span class="font-headline-sm text-headline-sm text-on-surface">Gestión y Documentos</span>
+<div class="flex flex-col gap-space-xs">
+<a class="flex items-center justify-between p-space-md bg-surface-container-lowest hover:bg-surface-container transition-colors rounded-xl text-on-surface group" data-path="vademecum" href="#">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">library_add</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold">Modificar Medicación</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Vademécum completo de Elsa</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-space-md bg-surface-container-lowest hover:bg-surface-container transition-colors rounded-xl text-on-surface group" data-path="ficha-medica" href="#">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary group-hover:scale-110 transition-transform">print</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold">Ver Ficha Imprimible</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Hoja limpia para la consulta médica</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">chevron_right</span>
+</a>
+</div>
+<!-- Human Reassurance Micro-Banner -->
+<div class="bg-surface-container-high/40 p-space-sm rounded-lg flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">verified_user</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">
+              Toda la información se sincroniza automáticamente con el resto de la familia.
+            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const btnConfirmTarde = document.getElementById('btn-confirm-tarde');
+      const tardeActions = document.getElementById('tarde-actions');
+      const tardeSuccess = document.getElementById('tarde-success');
+      const cardTarde = document.getElementById('card-tarde');
+      const progressSummary = document.getElementById('progress-summary');
+      const progressBar = document.getElementById('progress-bar');
+      const progressPct = document.getElementById('progress-pct');
+
+      if (btnConfirmTarde) {
+        btnConfirmTarde.addEventListener('click', () => {
+          tardeActions.classList.add('hidden');
+          tardeSuccess.classList.remove('hidden');
+          tardeSuccess.classList.add('flex');
+          cardTarde.classList.remove('ring-2', 'ring-primary');
+          cardTarde.classList.add('ring-1', 'ring-secondary');
+
+          // Update progress metrics
+          if (progressSummary) progressSummary.textContent = '4 de 4 tomas registradas hoy (100%)';
+          if (progressBar) progressBar.style.width = '100%';
+          if (progressPct) progressPct.textContent = '100%';
+        });
+      }
+
+      const btnSnooze = document.getElementById('btn-snooze-tarde');
+      if (btnSnooze) {
+        btnSnooze.addEventListener('click', () => {
+          btnSnooze.innerHTML = '<span class="material-symbols-outlined text-[18px]">done</span> Recordatorio en 15m';
+          btnSnooze.classList.add('opacity-75', 'cursor-not-allowed');
+          btnSnooze.disabled = true;
+        });
+      }
+
+      const btnSaveNote = document.getElementById('btn-save-note');
+      const inputObservation = document.getElementById('new-observation');
+      const noteDisplay = document.getElementById('note-display');
+
+      if (btnSaveNote && inputObservation && noteDisplay) {
+        btnSaveNote.addEventListener('click', () => {
+          const val = inputObservation.value.trim();
+          if (val) {
+            noteDisplay.textContent = `"${val}"`;
+            inputObservation.value = '';
+          }
+        });
+      }
+    });
+  </script>
+</div></main><footer class="w-full bg-surface-container-low py-space-lg mt-space-xl shadow-[0_-1px_6px_rgba(0,0,0,0.02)]"><div class="max-w-[1120px] mx-auto px-gutter-desktop flex flex-col sm:flex-row items-center justify-between gap-space-md text-center sm:text-left"><div class="flex items-center gap-space-sm justify-center sm:justify-start"><span class="material-symbols-outlined text-primary text-[20px]">spa</span><p class="font-body-sm text-body-sm text-on-surface-variant">Cuidando con amor y tranquilidad. Cada toma a su debido tiempo.</p></div><div class="flex items-center gap-space-sm text-on-surface-variant font-label-sm text-label-sm"><span class="">CuidAR • Asistencia Familiar</span></div></div></footer>
+
+</body></html>

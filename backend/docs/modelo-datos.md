@@ -5,6 +5,7 @@ ENUMS
   tipo_condicion    : 'diagnostico' | 'alergia'
   forma_medicacion  : 'comprimido' | 'gota' | 'ml' | 'aplicacion'
   estado_medicacion : 'activa' | 'discontinuada'
+  estado_toma       : 'tomada' | 'omitida'
 
 ENTIDADES
 
@@ -64,6 +65,16 @@ horario_toma
   hora               time          NOT NULL
   dias_semana        smallint[]    NOT NULL DEFAULT '{0,1,2,3,4,5,6}'   -- 0 = domingo
 
+toma                                -- registro diario de cada horario (pantalla Hoy)
+  id                 uuid          PK
+  horario_id         uuid          FK → horario_toma.id  NOT NULL
+  medicacion_id      uuid          FK → medicacion.id  ON DELETE CASCADE  NOT NULL
+  fecha              date          NOT NULL
+  hora_programada    time          NOT NULL      -- copia de horario_toma.hora al registrar
+  estado             estado_toma   NOT NULL
+  registrada_at      timestamptz   DEFAULT now()
+  UNIQUE (horario_id, fecha)                     -- registrar de nuevo corrige el estado
+
 RELACIONES
   cuidador         1 ── N  persona_a_cargo
   persona_a_cargo  1 ── N  condicion
@@ -71,3 +82,13 @@ RELACIONES
   persona_a_cargo  1 ── N  medicacion
   medico           1 ── N  medicacion      (opcional: medicacion.medico_id puede ser NULL)
   medicacion       1 ── N  horario_toma    (una medicación SOS no tiene horarios)
+  horario_toma     1 ── N  toma            (como máximo una por fecha)
+
+API (representación)
+  GET /medications        devuelve cada medicación con `horarios: [{ id, hora, dias_semana }]`
+                          y `medico: { id, nombre, especialidad, matricula } | null` embebidos.
+  POST/PATCH /medications aceptan `horarios: [{ hora: 'HH:MM', dias_semana?: [0..6] }]`;
+                          PATCH reemplaza el set completo y conserva el id de las horas que siguen.
+  /doctors, /conditions   CRUD; GET acepta ?personaId=. persona_id no se puede modificar.
+  /doses                  GET ?personaId=&fecha=  ·  POST { horario_id, fecha, estado } (upsert)
+                          ·  DELETE /:id (deshacer).

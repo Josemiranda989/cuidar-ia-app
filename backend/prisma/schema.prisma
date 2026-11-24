@@ -1,0 +1,138 @@
+// Fuente de verdad: ../docs/modelo-datos.md
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+// Prisma 7: la URL de conexión va en prisma.config.ts, no acá.
+datasource db {
+  provider = "postgresql"
+}
+
+enum tipo_condicion {
+  diagnostico
+  alergia
+}
+
+enum forma_medicacion {
+  comprimido
+  gota
+  ml
+  aplicacion
+}
+
+enum estado_medicacion {
+  activa
+  discontinuada
+}
+
+enum estado_toma {
+  tomada
+  omitida
+}
+
+model cuidador {
+  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  nombre     String
+  telefono   String?
+  created_at DateTime? @default(now()) @db.Timestamptz
+
+  personas_a_cargo persona_a_cargo[]
+}
+
+/// Entidad principal
+model persona_a_cargo {
+  id               String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  cuidador_id      String    @db.Uuid
+  nombre_completo  String
+  /// La edad se calcula, no se persiste
+  fecha_nacimiento DateTime  @db.Date
+  dni              String?
+  parentesco       String?
+  obra_social      String?
+  numero_afiliado  String?
+  notas            String?
+  created_at       DateTime? @default(now()) @db.Timestamptz
+  updated_at       DateTime? @default(now()) @db.Timestamptz
+
+  cuidador     cuidador     @relation(fields: [cuidador_id], references: [id], onDelete: NoAction)
+  condiciones  condicion[]
+  medicos      medico[]
+  medicaciones medicacion[]
+}
+
+model condicion {
+  id          String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  persona_id  String         @db.Uuid
+  tipo        tipo_condicion
+  descripcion String
+
+  persona persona_a_cargo @relation(fields: [persona_id], references: [id], onDelete: Cascade)
+}
+
+model medico {
+  id           String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  persona_id   String  @db.Uuid
+  nombre       String
+  especialidad String?
+  matricula    String?
+
+  persona      persona_a_cargo @relation(fields: [persona_id], references: [id], onDelete: Cascade)
+  medicaciones medicacion[]
+}
+
+model medicacion {
+  id                String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  persona_id        String            @db.Uuid
+  medico_id         String?           @db.Uuid
+  droga             String
+  nombre_comercial  String?
+  /// "10 mg", "500 mg / 400 UI"
+  concentracion     String
+  cantidad_por_toma Decimal           @db.Decimal(5, 2)
+  forma             forma_medicacion
+  via               String?
+  motivo            String?
+  indicaciones      String?
+  es_sos            Boolean           @default(false)
+  estado            estado_medicacion @default(activa)
+  fecha_inicio      DateTime          @db.Date
+  fecha_fin         DateTime?         @db.Date
+  motivo_baja       String?
+
+  persona  persona_a_cargo @relation(fields: [persona_id], references: [id], onDelete: Cascade)
+  medico   medico?         @relation(fields: [medico_id], references: [id], onDelete: SetNull)
+  horarios horario_toma[]
+  tomas    toma[]
+}
+
+model horario_toma {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  medicacion_id String   @db.Uuid
+  hora          DateTime @db.Time
+  /// 0 = domingo
+  dias_semana   Int[]    @default([0, 1, 2, 3, 4, 5, 6]) @db.SmallInt
+
+  medicacion medicacion @relation(fields: [medicacion_id], references: [id], onDelete: Cascade)
+  tomas      toma[]
+}
+
+/// Registro diario de cada horario (pantalla Hoy)
+model toma {
+  id              String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  horario_id      String      @db.Uuid
+  medicacion_id   String      @db.Uuid
+  fecha           DateTime    @db.Date
+  /// Copia de horario_toma.hora al registrar
+  hora_programada DateTime    @db.Time
+  estado          estado_toma
+  registrada_at   DateTime?   @default(now()) @db.Timestamptz
+
+  // NoAction y no Restrict: Restrict podría frenar el borrado en cascada desde medicacion.
+  horario    horario_toma @relation(fields: [horario_id], references: [id], onDelete: NoAction)
+  medicacion medicacion   @relation(fields: [medicacion_id], references: [id], onDelete: Cascade)
+
+  /// Registrar de nuevo corrige el estado
+  @@unique([horario_id, fecha])
+}

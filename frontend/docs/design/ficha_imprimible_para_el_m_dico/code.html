@@ -1,0 +1,354 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title>CuidAR</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-container-high":"#dee8ff","primary-container":"#0d766e","background":"#f9f9ff","tertiary-fixed":"#ffdcc3","surface-variant":"#d8e3fb","on-tertiary-container":"#ffe5d3","on-secondary-fixed":"#00201c","tertiary-container":"#a05600","secondary-fixed":"#71f8e4","on-secondary-fixed-variant":"#005048","on-surface":"#111c2d","on-tertiary-fixed-variant":"#6e3900","tertiary-fixed-dim":"#ffb77d","outline":"#6e7977","on-error":"#ffffff","surface-tint":"#006a63","on-primary":"#ffffff","error":"#ba1a1a","surface-container-highest":"#d8e3fb","on-secondary":"#ffffff","tertiary":"#7d4200","surface-container-lowest":"#ffffff","secondary-container":"#6df5e1","on-background":"#111c2d","inverse-on-surface":"#ecf1ff","surface-container-low":"#f0f3ff","surface":"#f9f9ff","on-primary-fixed-variant":"#00504a","error-container":"#ffdad6","secondary":"#006b5f","primary":"#005c55","secondary-fixed-dim":"#4fdbc8","surface-container":"#e7eeff","surface-dim":"#cfdaf2","primary-fixed-dim":"#7fd5cc","inverse-primary":"#7fd5cc","inverse-surface":"#263143","surface-bright":"#f9f9ff","on-surface-variant":"#3e4947","on-tertiary":"#ffffff","on-primary-fixed":"#00201d","outline-variant":"#bdc9c6","primary-fixed":"#9bf2e8","on-error-container":"#93000a","on-secondary-container":"#006f64","on-tertiary-fixed":"#2f1500","on-primary-container":"#a3faef"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xs":"0.25rem","gutter-desktop":"1.5rem",margin:"1rem","margin-desktop":"2.5rem","space-xl":"2rem","space-md":"1rem","space-sm":"0.5rem",gutter:"1rem","space-lg":"1.5rem","margin-tablet":"1.5rem","gutter-tablet":"1.25rem"},fontFamily:{"label-sm":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"time-display":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"]},fontSize:{"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.04em",fontWeight:"700"}],"label-lg":["15px",{lineHeight:"20px",letterSpacing:"0.01em",fontWeight:"600"}],"time-display":["28px",{lineHeight:"32px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-md":["15px",{lineHeight:"24px",fontWeight:"400"}],"headline-md":["20px",{lineHeight:"28px",fontWeight:"600"}],"display-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"700"}],"label-md":["13px",{lineHeight:"18px",letterSpacing:"0.02em",fontWeight:"600"}],"body-sm":["13px",{lineHeight:"20px",fontWeight:"400"}],"headline-sm":["18px",{lineHeight:"26px",fontWeight:"600"}],"headline-lg-mobile":["22px",{lineHeight:"30px",letterSpacing:"-0.01em",fontWeight:"700"}],"body-lg":["17px",{lineHeight:"26px",fontWeight:"400"}],"headline-lg":["26px",{lineHeight:"34px",letterSpacing:"-0.015em",fontWeight:"700"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 w-full px-gutter-desktop max-w-[1120px] mx-auto flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md min-w-0"><div class="flex items-center gap-space-sm shrink-0"><img alt="Serena Cuidados Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1V7dUT1xhtGuPjG8_ulTUuK4ZYzQUplLH98CD8LXINlQISxjMt_QBizAZLNaN5i83ECiEvgTm5h-SjXrun0QJEfMpviOfKTw0Ez-8fNY1v_auEggfaLtNNUTyBYlmtJ9ts7I4uhCgK1ETBgFw5DrU6MJrAS7630fpRKTkR8b07pqUi47Q4EZoIw-qTRoZpt-0Vz_Ffh6HrByL4nnvoLIYMdxoSThZB3ZTkQqTihHJyX"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-semibold">CuidAR</span></div><div class="hidden sm:flex items-center gap-space-xs bg-surface-container px-space-md py-space-xs rounded-full shadow-[0_1px_4px_rgba(0,0,0,0.02)]"><span class="material-symbols-outlined text-primary text-[18px]">favorite</span><span class="font-label-md text-label-md text-on-surface font-semibold">Cuidando a: Elsa (81 años)</span></div></div><div class="flex items-center gap-space-md shrink-0"><button class="hidden md:flex items-center gap-space-xs bg-error-container hover:bg-error/20 text-on-error-container px-space-md py-space-xs rounded-full font-label-md text-label-md transition-colors" type="button"><span class="material-symbols-outlined text-error text-[18px]">emergency</span><span class="">Teléfono de Urgencias</span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="text-right hidden sm:block"><span class="block font-label-md text-label-md text-on-surface">Marina</span><span class="block font-label-sm text-label-sm text-on-surface-variant font-normal">Cuidadora Principal</span></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn1lcJnhTnlTwq1E2KiT4VYwJFGda8S8Np6HHzccJo4xjS_AdEQyQ1ndZqsNujsdjykyv7dyv2iGrOQ8G1UJGZ4CimA7_5ygAZwAM_hbO5ipkwU5egJdv6z_f3EW3VoXd9lXpqJ8cL1I9U-Uso60WOhqM7N4Jx_1MN9n4ZHXgaDjhFKtbIMFDxw4rcpfx9RvKmXIFwp6jhJmkYkQThu6s5cZ7Fidnqzntp9wEfBjgw"></div></div></div><div class="w-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.02)]"><div class="max-w-[1120px] mx-auto px-gutter-desktop"><nav class="flex items-center gap-space-xs py-space-xs overflow-x-auto" data-active-classes="bg-primary-container text-on-primary font-bold"><a class="px-space-md py-space-sm rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors whitespace-nowrap" data-path="hoy" href="#">Hoy</a><a class="px-space-md py-space-sm rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors whitespace-nowrap" data-path="vademecum" href="#">Vademécum</a><a aria-current="page" class="px-space-md py-space-sm rounded-lg transition-colors whitespace-nowrap bg-primary-container text-on-primary font-bold" data-path="ficha-medica" href="#">Ficha para el Médico</a><a class="px-space-md py-space-sm rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors whitespace-nowrap" data-path="perfil-elsa" href="#">Ficha de Elsa</a></nav></div></div></header><main class="w-full pt-32 max-w-[1120px] mx-auto px-gutter-desktop flex-1"><div class="flex flex-col w-full">
+<div class="flex flex-col gap-space-lg mb-space-xl">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md bg-surface-container-lowest p-space-lg rounded-xl shadow-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary-container text-on-primary flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[28px]">description</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-md text-headline-md text-on-surface">Ficha Clínica de Elsa</span>
+<span class="bg-secondary-container text-on-secondary-container px-space-sm py-0.5 rounded-full font-label-sm text-label-sm">Lista para Imprimir</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Resumen farmacológico verificado y ordenado para presentar al médico tratante.</p>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm">
+<button class="flex items-center gap-space-xs bg-primary hover:bg-primary-container text-on-primary px-space-lg py-space-sm rounded-lg font-label-lg text-label-lg shadow-sm transition-all transform active:scale-95" onclick="window.print()" type="button">
+<span class="material-symbols-outlined text-[20px]">print</span>
+<span class="">Imprimir Ficha</span>
+</button>
+<button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-space-sm rounded-lg font-label-md text-label-md transition-colors" id="btnDownload" onclick="simularDescarga()" type="button">
+<span class="material-symbols-outlined text-[20px] text-primary">download</span>
+<span class="">Descargar PDF</span>
+</button>
+<a class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-space-sm rounded-lg font-label-md text-label-md transition-colors" href="https://wa.me/?text=Hola%20Dr.%2C%20adjunto%20el%20resumen%20farmacol%C3%B3gico%20actualizado%20de%20Elsa%20Ramos%20(81%20a%C3%B1os)%20para%20la%20consulta." rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[20px] text-secondary">share</span>
+<span class="">WhatsApp al Dr.</span>
+</a>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[22px] mt-0.5">verified</span>
+<div>
+<span class="block font-label-md text-label-md text-on-surface">Validación de Dosis</span>
+<span class="block font-body-sm text-body-sm text-on-surface-variant">4 fármacos de base cotejados con recetas vigentes.</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-tertiary-container text-[22px] mt-0.5">notification_important</span>
+<div>
+<span class="block font-label-md text-label-md text-on-surface">Alergia Grave Declarada</span>
+<span class="block font-body-sm text-body-sm text-on-surface-variant">Penicilinas y derivados betalactámicos.</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[22px] mt-0.5">history_toggle_off</span>
+<div>
+<span class="block font-label-md text-label-md text-on-surface">Próxima Consulta</span>
+<span class="block font-body-sm text-body-sm text-on-surface-variant">Cardiología: Jueves 31 de Octubre, 10:30 hs.</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl shadow-xl p-6 sm:p-10 mx-auto w-full max-w-[960px] text-on-surface" id="printableArea">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between pb-space-lg gap-space-md border-b border-surface-variant">
+<div class="flex items-center gap-space-md">
+<div class="w-14 h-14 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[32px]">local_hospital</span>
+</div>
+<div>
+<span class="block font-label-sm text-label-sm text-primary tracking-widest uppercase">CUIDAR • DOCUMENTO CLÍNICO</span>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">RESUMEN FARMACOLÓGICO ACTIVO</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Uso exclusivo para consultas médicas y de guardia ambulatoria</p>
+</div>
+</div>
+<div class="sm:text-right bg-surface-container-low px-space-md py-space-sm rounded-lg">
+<span class="block font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Fecha de emisión</span>
+<span class="font-label-lg text-label-lg text-on-surface">Actualizado al 24 de Octubre de 2024</span>
+<span class="block font-body-sm text-body-sm text-outline">Versión 3.2 • Frecuencia diaria</span>
+</div>
+</div>
+<div class="my-space-lg grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<div class="md:col-span-2 bg-surface-container-low p-space-md rounded-lg flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Ficha de Identificación</span>
+<span class="bg-surface-container-high px-space-sm py-0.5 rounded text-on-surface font-label-sm text-label-sm">Paciente Ambulatorio</span>
+</div>
+<div class="flex flex-wrap items-baseline gap-x-space-md gap-y-1">
+<span class="font-display-lg text-display-lg text-on-surface font-bold">Elsa Ramos</span>
+<span class="font-label-lg text-label-lg text-primary bg-primary/10 px-space-sm py-0.5 rounded-full">81 años</span>
+<span class="font-body-md text-body-md text-on-surface-variant">DNI: <strong class="text-on-surface">12.345.678</strong></span>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm border-t border-surface-variant/70 grid grid-cols-1 sm:grid-cols-2 gap-space-sm text-body-sm">
+<div>
+<span class="block font-label-sm text-label-sm text-on-surface-variant">Cobertura médica:</span>
+<span class="font-label-md text-label-md text-on-surface">PAMI / Plan Dorado</span>
+<span class="block font-body-sm text-body-sm text-outline">Afiliado Nº: 002938192301</span>
+</div>
+<div>
+<span class="block font-label-sm text-label-sm text-on-surface-variant">Acompañante responsable:</span>
+<span class="font-label-md text-label-md text-on-surface">Marina Ramos (Hija, Cuidadora)</span>
+<span class="block font-body-sm text-body-sm text-outline">+54 9 11 4455-6677</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col justify-between">
+<div>
+<span class="block font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mb-space-xs">Diagnósticos de Base</span>
+<ul class="space-y-space-xs">
+<li class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-primary">radio_button_checked</span>
+                Hipertensión arterial esencial
+              </li>
+<li class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-primary">radio_button_checked</span>
+                Hipotiroidismo crónico
+              </li>
+<li class="flex items-center gap-space-xs font-label-md text-label-md text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-primary">radio_button_checked</span>
+                Osteopenia moderada
+              </li>
+</ul>
+</div>
+<div class="mt-space-md pt-space-xs text-outline font-body-sm text-body-sm">
+<span class="">Último control clínico: Dr. Morales (12/09/2024)</span>
+</div>
+</div>
+</div>
+<div class="mb-space-lg bg-error-container text-on-error-container p-space-md rounded-lg flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-error text-on-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">warning</span>
+</div>
+<div class="flex-1">
+<span class="block font-label-sm text-label-sm uppercase tracking-wider text-error font-bold">Alerta Médica de Alergias y Contraindicaciones</span>
+<p class="font-label-lg text-label-lg font-bold">
+            ALERGIAS CONOCIDAS: PENICILINA (Reacción cutánea severa y broncoespasmo)
+          </p>
+<p class="font-body-sm text-body-sm opacity-90">Sin otras alergias alimentarias ni farmacológicas declaradas hasta la fecha.</p>
+</div>
+</div>
+<div class="mb-space-xl">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">pill</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Cuadro de Medicación Activa Vigente</h2>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">4 tomas programadas diarias</span>
+</div>
+<div class="overflow-x-auto rounded-lg">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high text-on-surface font-label-md text-label-md">
+<th class="py-space-sm px-space-md rounded-l-lg">Droga / Marca</th>
+<th class="py-space-sm px-space-md">Dosis</th>
+<th class="py-space-sm px-space-md">Vía y Horario</th>
+<th class="py-space-sm px-space-md">Indicado por</th>
+<th class="py-space-sm px-space-md">Inicio</th>
+<th class="py-space-sm px-space-md rounded-r-lg">Motivo / Indicación</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md divide-y divide-surface-container">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-space-md px-space-md">
+<span class="font-label-lg text-label-lg text-on-surface block">Levotiroxina</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">T4 Montpellier</span>
+</td>
+<td class="py-space-md px-space-md font-label-md text-label-md text-on-surface">
+                  50 mcg <span class="block font-body-sm text-body-sm text-outline">1 comp/día</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="bg-primary/10 text-primary px-space-xs py-0.5 rounded font-label-md text-label-md font-bold">07:30</span>
+<span class="font-body-sm text-body-sm text-on-surface">Oral • Ayuno estricto (30m antes de comer)</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-label-md text-label-md text-on-surface block">Dra. Gómez</span>
+<span class="font-body-sm text-body-sm text-outline">Endocrinología (MN 89.412)</span>
+</td>
+<td class="py-space-md px-space-md font-body-sm text-body-sm text-on-surface">Ene 2022</td>
+<td class="py-space-md px-space-md font-body-sm text-body-sm text-on-surface">
+<span class="inline-block bg-surface-container px-space-sm py-0.5 rounded text-on-surface font-label-sm text-label-sm">Hipotiroidismo</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-low/30">
+<td class="py-space-md px-space-md">
+<span class="font-label-lg text-label-lg text-on-surface block">Enalapril</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Lotrial 10</span>
+</td>
+<td class="py-space-md px-space-md font-label-md text-label-md text-on-surface">
+                  10 mg <span class="block font-body-sm text-body-sm text-outline">1 comp/día</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="bg-primary/10 text-primary px-space-xs py-0.5 rounded font-label-md text-label-md font-bold">08:00</span>
+<span class="font-body-sm text-body-sm text-on-surface">Oral • Desayuno</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-label-md text-label-md text-on-surface block">Dr. Morales</span>
+<span class="font-body-sm text-body-sm text-outline">Cardiología (MN 45.102)</span>
+</td>
+<td class="py-space-md px-space-md font-body-sm text-body-sm text-on-surface">Mar 2023</td>
+<td class="py-space-md px-space-md font-body-sm text-body-sm text-on-surface">
+<span class="inline-block bg-surface-container px-space-sm py-0.5 rounded text-on-surface font-label-sm text-label-sm">Control de Presión Arterial (TA)</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-space-md px-space-md">
+<span class="font-label-lg text-label-lg text-on-surface block">Calcio Base + Vit D3</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Ostelin D3</span>
+</td>
+<td class="py-space-md px-space-md font-label-md text-label-md text-on-surface">
+                  500 mg / 400 UI <span class="block font-body-sm text-body-sm text-outline">1 comp masticable</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="bg-primary/10 text-primary px-space-xs py-0.5 rounded font-label-md text-label-md font-bold">13:00</span>
+<span class="font-body-sm text-body-sm text-on-surface">Oral • Junto al Almuerzo</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-label-md text-label-md text-on-surface block">Dr. Rossi</span>
+<span class="font-body-sm text-body-sm text-outline">Traumatología (MN 62.889)</span>
+</td>
+<td class="py-space-md px-space-md font-body-sm text-body-sm text-on-surface">Ago 2023</td>
+<td class="py-space-md px-space-md font-body-sm text-body-sm text-on-surface">
+<span class="inline-block bg-surface-container px-space-sm py-0.5 rounded text-on-surface font-label-sm text-label-sm">Salud ósea / Osteopenia</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors bg-surface-container-low/30">
+<td class="py-space-md px-space-md">
+<span class="font-label-lg text-label-lg text-on-surface block">Atorvastatina</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Lipitor</span>
+</td>
+<td class="py-space-md px-space-md font-label-md text-label-md text-on-surface">
+                  20 mg <span class="block font-body-sm text-body-sm text-outline">1 comp/noche</span>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="bg-primary/10 text-primary px-space-xs py-0.5 rounded font-label-md text-label-md font-bold">21:30</span>
+<span class="font-body-sm text-body-sm text-on-surface">Oral • Antes de dormir</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<span class="font-label-md text-label-md text-on-surface block">Dr. Morales</span>
+<span class="font-body-sm text-body-sm text-outline">Cardiología (MN 45.102)</span>
+</td>
+<td class="py-space-md px-space-md font-body-sm text-body-sm text-on-surface">Jun 2023</td>
+<td class="py-space-md px-space-md font-body-sm text-body-sm text-on-surface">
+<span class="inline-block bg-surface-container px-space-sm py-0.5 rounded text-on-surface font-label-sm text-label-sm">Dislipidemia / Colesterol</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md mb-space-lg">
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-space-xs mb-space-xs text-primary">
+<span class="material-symbols-outlined text-[20px]">monitor_heart</span>
+<span class="font-label-md text-label-md font-bold">Parámetros de Signos Vitales Habituales</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Monitoreo semanal realizado en domicilio por Marina Ramos:</p>
+<div class="grid grid-cols-2 gap-space-sm mt-space-sm">
+<div class="bg-surface-container-lowest p-space-xs rounded text-center">
+<span class="block font-label-sm text-label-sm text-outline">Presión Arterial Promedio</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">125 / 75 <small class="text-label-sm font-normal">mmHg</small></span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded text-center">
+<span class="block font-label-sm text-label-sm text-outline">Frecuencia Cardíaca</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">68 <small class="text-label-sm font-normal">ppm en reposo</small></span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-space-xs mb-space-xs text-tertiary-container">
+<span class="material-symbols-outlined text-[20px]">notes</span>
+<span class="font-label-md text-label-md font-bold">Observaciones Clínicas del Cuidador</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            - No se han registrado omisiones de tomas en las últimas 3 semanas.<br>
+            - Se tolera adecuadamente la ingesta matutina con el vaso de agua indicado.<br>
+            - Consultar si corresponde renovar análisis de laboratorio de TSH y perfil lipídico.
+          </p>
+</div>
+</div>
+<div class="pt-space-md border-t border-surface-variant">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg items-end">
+<div class="min-h-[140px] bg-surface-container-low/40 rounded-lg p-space-md flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Anotaciones del Médico durante la consulta</span>
+<span class="font-label-sm text-label-sm text-outline">Espacio para notas manuscritas</span>
+</div>
+<div class="space-y-4 my-2">
+<div class="border-b border-dashed border-outline-variant/60 w-full h-4"></div>
+<div class="border-b border-dashed border-outline-variant/60 w-full h-4"></div>
+<div class="border-b border-dashed border-outline-variant/60 w-full h-4"></div>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Ajustes posológicos o nuevas indicaciones:</span>
+</div>
+<div class="min-h-[140px] flex flex-col items-center justify-end p-space-md bg-surface-container-low/40 rounded-lg text-center">
+<div class="w-64 border-b border-on-surface/40 mb-space-xs"></div>
+<span class="font-label-md text-label-md text-on-surface">Firma y Sello del Profesional</span>
+<span class="font-body-sm text-body-sm text-outline">Médico Matriculado • Fecha: ____ / ____ / 2024</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs flex flex-col sm:flex-row items-center justify-between text-outline font-label-sm text-label-sm">
+<span class="">Generado automáticamente a través de la plataforma CuidAR</span>
+<span class="">Página 1 de 1 • Válido para interconsultas médicas</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md p-space-md bg-surface-container-low rounded-xl">
+<div class="flex items-center gap-space-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[20px]">help_outline</span>
+<span class="font-body-sm text-body-sm">¿Deseas modificar alguna dosis o agregar un nuevo medicamento antes de imprimir?</span>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="bg-surface-container-highest hover:bg-surface-container text-on-surface px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-colors" type="button">
+          Editar Medicamentos
+        </button>
+<button class="bg-primary text-on-primary px-space-md py-space-xs rounded-lg font-label-md text-label-md transition-colors" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" type="button">
+          Volver arriba
+        </button>
+</div>
+</div>
+</div>
+<div class="fixed bottom-6 right-6 z-50 bg-inverse-surface text-inverse-on-surface px-space-lg py-space-md rounded-xl shadow-xl transform translate-y-24 opacity-0 transition-all duration-300 flex items-center gap-space-sm pointer-events-none" id="toastMessage">
+<span class="material-symbols-outlined text-primary-fixed text-[24px]">task_alt</span>
+<div>
+<span class="font-label-md text-label-md block font-bold" id="toastTitle">Documento generado</span>
+<span class="font-body-sm text-body-sm text-inverse-on-surface/80" id="toastDesc">Se inició la preparación del PDF.</span>
+</div>
+</div>
+</div>
+<script>
+  function simularDescarga() {
+    const toast = document.getElementById('toastMessage');
+    const toastTitle = document.getElementById('toastTitle');
+    const toastDesc = document.getElementById('toastDesc');
+    
+    toastTitle.innerText = "Descarga de Ficha Médica";
+    toastDesc.innerText = "Generando PDF en alta resolución para Elsa Ramos...";
+    
+    toast.classList.remove('translate-y-24', 'opacity-0');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    setTimeout(() => {
+      window.print();
+      setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3000);
+    }, 800);
+  }
+</script></main><footer class="w-full bg-surface-container-low py-space-lg mt-space-xl shadow-[0_-1px_6px_rgba(0,0,0,0.02)]"><div class="max-w-[1120px] mx-auto px-gutter-desktop flex flex-col sm:flex-row items-center justify-between gap-space-md text-center sm:text-left"><div class="flex items-center gap-space-sm justify-center sm:justify-start"><span class="material-symbols-outlined text-primary text-[20px]">spa</span><p class="font-body-sm text-body-sm text-on-surface-variant">Cuidando con amor y tranquilidad. Cada toma a su debido tiempo.</p></div><div class="flex items-center gap-space-sm text-on-surface-variant font-label-sm text-label-sm"><span class="">CuidAR • Asistencia Familiar</span></div></div></footer>
+
+</body></html>

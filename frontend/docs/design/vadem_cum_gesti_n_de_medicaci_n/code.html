@@ -1,0 +1,549 @@
+<!DOCTYPE html><html lang="es" style=""><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title class="">CuidAR</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-container-high":"#dee8ff","primary-container":"#0d766e","background":"#f9f9ff","tertiary-fixed":"#ffdcc3","surface-variant":"#d8e3fb","on-tertiary-container":"#ffe5d3","on-secondary-fixed":"#00201c","tertiary-container":"#a05600","secondary-fixed":"#71f8e4","on-secondary-fixed-variant":"#005048","on-surface":"#111c2d","on-tertiary-fixed-variant":"#6e3900","tertiary-fixed-dim":"#ffb77d","outline":"#6e7977","on-error":"#ffffff","surface-tint":"#006a63","on-primary":"#ffffff","error":"#ba1a1a","surface-container-highest":"#d8e3fb","on-secondary":"#ffffff","tertiary":"#7d4200","surface-container-lowest":"#ffffff","secondary-container":"#6df5e1","on-background":"#111c2d","inverse-on-surface":"#ecf1ff","surface-container-low":"#f0f3ff","surface":"#f9f9ff","on-primary-fixed-variant":"#00504a","error-container":"#ffdad6","secondary":"#006b5f","primary":"#005c55","secondary-fixed-dim":"#4fdbc8","surface-container":"#e7eeff","surface-dim":"#cfdaf2","primary-fixed-dim":"#7fd5cc","inverse-primary":"#7fd5cc","inverse-surface":"#263143","surface-bright":"#f9f9ff","on-surface-variant":"#3e4947","on-tertiary":"#ffffff","on-primary-fixed":"#00201d","outline-variant":"#bdc9c6","primary-fixed":"#9bf2e8","on-error-container":"#93000a","on-secondary-container":"#006f64","on-tertiary-fixed":"#2f1500","on-primary-container":"#a3faef"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xs":"0.25rem","gutter-desktop":"1.5rem",margin:"1rem","margin-desktop":"2.5rem","space-xl":"2rem","space-md":"1rem","space-sm":"0.5rem",gutter:"1rem","space-lg":"1.5rem","margin-tablet":"1.5rem","gutter-tablet":"1.25rem"},fontFamily:{"label-sm":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"time-display":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"display-lg":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"]},fontSize:{"label-sm":["11px",{lineHeight:"14px",letterSpacing:"0.04em",fontWeight:"700"}],"label-lg":["15px",{lineHeight:"20px",letterSpacing:"0.01em",fontWeight:"600"}],"time-display":["28px",{lineHeight:"32px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-md":["15px",{lineHeight:"24px",fontWeight:"400"}],"headline-md":["20px",{lineHeight:"28px",fontWeight:"600"}],"display-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"700"}],"label-md":["13px",{lineHeight:"18px",letterSpacing:"0.02em",fontWeight:"600"}],"body-sm":["13px",{lineHeight:"20px",fontWeight:"400"}],"headline-sm":["18px",{lineHeight:"26px",fontWeight:"600"}],"headline-lg-mobile":["22px",{lineHeight:"30px",letterSpacing:"-0.01em",fontWeight:"700"}],"body-lg":["17px",{lineHeight:"26px",fontWeight:"400"}],"headline-lg":["26px",{lineHeight:"34px",letterSpacing:"-0.015em",fontWeight:"700"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 w-full px-gutter-desktop max-w-[1120px] mx-auto flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md min-w-0"><div class="flex items-center gap-space-sm shrink-0"><img alt="CuidAR Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1V7dUT1xhtGuPjG8_ulTUuK4ZYzQUplLH98CD8LXINlQISxjMt_QBizAZLNaN5i83ECiEvgTm5h-SjXrun0QJEfMpviOfKTw0Ez-8fNY1v_auEggfaLtNNUTyBYlmtJ9ts7I4uhCgK1ETBgFw5DrU6MJrAS7630fpRKTkR8b07pqUi47Q4EZoIw-qTRoZpt-0Vz_Ffh6HrByL4nnvoLIYMdxoSThZB3ZTkQqTihHJyX"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-semibold">CuidAR</span></div><div class="hidden sm:flex items-center gap-space-xs bg-surface-container px-space-md py-space-xs rounded-full shadow-[0_1px_4px_rgba(0,0,0,0.02)]"><span class="material-symbols-outlined text-primary text-[18px]">favorite</span><span class="font-label-md text-label-md text-on-surface font-semibold">Cuidando a: Elsa (81 años)</span></div></div><div class="flex items-center gap-space-md shrink-0"><button class="hidden md:flex items-center gap-space-xs bg-error-container hover:bg-error/20 text-on-error-container px-space-md py-space-xs rounded-full font-label-md text-label-md transition-colors" type="button"><span class="material-symbols-outlined text-error text-[18px]">emergency</span><span class="">Teléfono de Urgencias</span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="text-right hidden sm:block"><span class="block font-label-md text-label-md text-on-surface">Marina</span><span class="block font-label-sm text-label-sm text-on-surface-variant font-normal">Cuidadora Principal</span></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn1lcJnhTnlTwq1E2KiT4VYwJFGda8S8Np6HHzccJo4xjS_AdEQyQ1ndZqsNujsdjykyv7dyv2iGrOQ8G1UJGZ4CimA7_5ygAZwAM_hbO5ipkwU5egJdv6z_f3EW3VoXd9lXpqJ8cL1I9U-Uso60WOhqM7N4Jx_1MN9n4ZHXgaDjhFKtbIMFDxw4rcpfx9RvKmXIFwp6jhJmkYkQThu6s5cZ7Fidnqzntp9wEfBjgw"></div></div></div><div class="w-full bg-surface-container-lowest shadow-[0_1px_4px_rgba(0,0,0,0.02)]"><div class="max-w-[1120px] mx-auto px-gutter-desktop"><nav class="flex items-center gap-space-xs py-space-xs overflow-x-auto" data-active-classes="bg-primary-container text-on-primary font-bold"><a class="px-space-md py-space-sm rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors whitespace-nowrap" data-path="hoy" href="#">Hoy</a><a aria-current="page" class="px-space-md py-space-sm rounded-lg transition-colors whitespace-nowrap bg-primary-container text-on-primary font-bold" data-path="vademecum" href="#">Vademécum</a><a class="px-space-md py-space-sm rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors whitespace-nowrap" data-path="ficha-medica" href="#">Ficha para el Médico</a><a class="px-space-md py-space-sm rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors whitespace-nowrap" data-path="perfil-elsa" href="#">Ficha de Elsa</a></nav></div></div></header><main class="w-full pt-32 max-w-[1120px] mx-auto px-gutter-desktop flex-1"><div class="flex flex-col w-full pb-16">
+<!-- Top Intro & Summary Banner -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-low p-space-lg sm:p-margin-desktop mb-space-xl shadow-sm">
+<div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-space-lg">
+<div class="max-w-2xl">
+<div class="inline-flex items-center gap-space-xs bg-primary-container/10 text-primary px-space-md py-space-xs rounded-full font-label-sm text-label-sm mb-space-sm uppercase tracking-wider">
+<span class="material-symbols-outlined text-[16px]">medication</span>
+          Vademécum Personal
+        </div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">
+          Medicamentos de Elsa
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-xs">
+          Registro completo, claro y sin tecnicismos para el control cotidiano de tomas, recetas vigentes y pautas médicas.
+        </p>
+</div>
+<!-- Quick Action Buttons -->
+<div class="flex flex-wrap items-center gap-space-sm shrink-0">
+<a class="inline-flex items-center justify-center gap-space-xs bg-surface-container-lowest text-primary hover:bg-surface-container-high px-space-lg py-space-md rounded-lg font-label-lg text-label-lg transition-all shadow-sm" data-path="ficha-medica" href="#">
+<span class="material-symbols-outlined text-[20px]">print</span>
+<span class="">Ficha Imprimible</span>
+</a>
+<button class="inline-flex items-center justify-center gap-space-xs bg-primary text-on-primary hover:bg-primary-container px-space-lg py-space-md rounded-lg font-label-lg text-label-lg shadow-md transition-all active:scale-[0.99]" id="btnOpenNewMed" type="button"><span class="material-symbols-outlined text-[20px]">add_circle</span>
+<span class="">Cargar Medicamento</span></button>
+</div>
+</div>
+<!-- Soft Ambient Graphic Accent -->
+<div class="absolute -right-12 -bottom-16 w-56 h-56 rounded-full bg-secondary-fixed/30 blur-3xl pointer-events-none"></div>
+</div>
+<!-- Filter & Search Toolbar -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm mb-space-xl flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md">
+<!-- Search Input -->
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-space-md top-1/2 -translate-y-1/2 text-outline text-[22px]">search</span>
+<input class="w-full h-12 pl-12 pr-space-md bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest shadow-inner transition-colors" id="searchInput" placeholder="Buscar por nombre comercial, droga o médico..." type="text">
+</div>
+<!-- Status Tabs -->
+<div class="flex items-center gap-space-xs p-1 bg-surface-container rounded-lg overflow-x-auto">
+<button class="filter-tab px-space-md py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface whitespace-nowrap transition-colors" data-filter="all" type="button">
+        Todas <span class="ml-1 opacity-70">(6)</span>
+</button>
+<button class="filter-tab active-tab bg-primary text-on-primary px-space-md py-2 rounded-lg font-label-md text-label-md whitespace-nowrap shadow-sm transition-colors" data-filter="active" type="button">
+        Activas <span class="ml-1 opacity-90">(4)</span>
+</button>
+<button class="filter-tab px-space-md py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface whitespace-nowrap transition-colors" data-filter="discontinued" type="button">
+        Discontinuadas <span class="ml-1 opacity-70">(2)</span>
+</button>
+</div>
+</div>
+<!-- Slide-out / Collapsible Drawer Form for New Medication -->
+<div class="overflow-hidden bg-surface-container-lowest rounded-xl p-space-lg sm:p-margin-desktop mb-space-xl shadow-md transition-all hidden" id="newMedDrawer">
+<div class="flex items-start justify-between pb-space-md mb-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">edit_note</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Cargar nuevo medicamento o pauta</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Llene la información de forma simple y en sus propias palabras.</p>
+</div>
+</div>
+<button class="p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" id="btnCloseDrawer" type="button">
+<span class="material-symbols-outlined text-[24px]">close</span>
+</button>
+</div>
+<form class="space-y-space-lg" id="medForm">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
+<!-- Nombre del medicamento -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface">Nombre comercial o droga</label>
+<input class="h-12 px-space-md bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:bg-surface-container-lowest shadow-sm" placeholder="Ej: Enalapril o Lotrial" required="" type="text">
+<span class="font-body-sm text-body-sm text-outline">Tal como figura en la cajita o receta.</span>
+</div>
+<!-- Dosis y Presentación -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface">Dosis y presentación</label>
+<input class="h-12 px-space-md bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:bg-surface-container-lowest shadow-sm" placeholder="Ej: 10 mg • 1 comprimido matutino" required="" type="text">
+<span class="font-body-sm text-body-sm text-outline">Miligramos, gotas, cápsula, cucharada.</span>
+</div>
+<!-- Horario y Frecuencia -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface">Frecuencia y horario sugerido</label>
+<input class="h-12 px-space-md bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:bg-surface-container-lowest shadow-sm" placeholder="Ej: 1 vez al día - 08:00 hs con el desayuno" required="" type="text">
+<span class="font-body-sm text-body-sm text-outline">Detallar si es en ayunas, con comida o antes de dormir.</span>
+</div>
+<!-- Médico que indicó -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface">¿Quién lo recetó?</label>
+<input class="h-12 px-space-md bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:bg-surface-container-lowest shadow-sm" placeholder="Ej: Dr. Morales (Cardiólogo de cabecera)" type="text">
+<span class="font-body-sm text-body-sm text-outline">Nombre del profesional o centro médico.</span>
+</div>
+<!-- Motivo / Para qué sirve -->
+<div class="flex flex-col gap-space-xs md:col-span-2">
+<label class="font-label-md text-label-md text-on-surface">Motivo / ¿Para qué sirve?</label>
+<input class="h-12 px-space-md bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:bg-surface-container-lowest shadow-sm" placeholder="Ej: Regular la presión arterial alta y cuidar riñones" type="text">
+</div>
+<!-- Estado Selector -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface">Estado del tratamiento</label>
+<div class="flex items-center gap-space-md h-12">
+<label class="flex items-center gap-space-xs cursor-pointer">
+<input checked="" class="accent-primary w-4 h-4" name="medStatus" type="radio" value="activa">
+<span class="font-body-md text-body-md text-on-surface">Activa</span>
+</label>
+<label class="flex items-center gap-space-xs cursor-pointer">
+<input class="accent-primary w-4 h-4" name="medStatus" type="radio" value="discontinuada">
+<span class="font-body-md text-body-md text-on-surface">Discontinuada / Guardada</span>
+</label>
+</div>
+</div>
+<!-- Notas para el Cuidador -->
+<div class="flex flex-col gap-space-xs md:col-span-2">
+<label class="font-label-md text-label-md text-on-surface">Notas para el cuidador</label>
+<textarea class="p-space-md bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:bg-surface-container-lowest shadow-sm resize-none" placeholder="Ej: Comprar antes del viernes, queda 1 solo blíster en el botiquín de la cocina." rows="2"></textarea>
+</div>
+</div>
+<!-- Form Actions -->
+<div class="flex flex-wrap items-center justify-end gap-space-sm pt-space-md">
+<button class="px-space-lg py-space-md rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container transition-colors" id="btnCancelDrawer" type="button">
+          Cancelar
+        </button>
+<button class="bg-primary text-on-primary hover:bg-primary-container px-space-xl py-space-md rounded-lg font-label-lg text-label-lg shadow-md transition-all" type="submit">
+          Guardar Medicamento
+        </button>
+</div>
+</form>
+</div>
+<!-- SECTION 1: Medicamentos Activos -->
+<div class="flex flex-col gap-space-md mb-space-xl" id="sectionActivas">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Medicaciones Activas Habituales</h2>
+<span class="bg-secondary-fixed/50 text-on-secondary-fixed font-label-sm text-label-sm px-2 py-0.5 rounded-full ml-1 font-semibold">4 vigentes</span>
+</div>
+<span class="hidden sm:inline-block font-body-sm text-body-sm text-on-surface-variant">Próxima toma programada: 13:00 hs</span>
+</div>
+<!-- Active Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Card 1: Enalapril -->
+<article class="med-card relative flex flex-col justify-between bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-all" data-title="Enalapril 10mg Cardiología Morales Presion">
+<div class="flex items-start justify-between gap-space-sm mb-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="w-11 h-11 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[24px]">pill</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Enalapril</h3>
+<span class="font-label-md text-label-md font-semibold text-primary">10 mg</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Cardiología • 1 comprimido diario</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 bg-surface-container-high text-on-surface px-space-sm py-1 rounded-full font-label-sm text-label-sm shrink-0">
+<span class="material-symbols-outlined text-[15px] text-primary">schedule</span>
+            08:00 hs
+          </span>
+</div>
+<div class="space-y-space-xs mb-space-md py-space-xs bg-surface-container-low/60 rounded-lg px-space-md">
+<div class="flex items-center gap-space-xs font-body-sm text-body-sm text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary">info</span>
+<span class="font-semibold">Para qué sirve:</span> Control de presión arterial
+          </div>
+<div class="flex items-center gap-space-xs font-body-sm text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-outline">person</span>
+<span class="">Indicó Dr. Morales (Cardiólogo de cabecera)</span>
+</div>
+<div class="flex items-start gap-space-xs font-body-sm text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary shrink-0">sticky_note_2</span>
+<span class="">Dar con vaso entero de agua tibia luego del desayuno.</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="inline-flex items-center gap-1 text-[#047857] bg-[#ECFDF5] font-label-sm text-label-sm px-2.5 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+            Activa
+          </span>
+<div class="flex items-center gap-space-xs">
+<button class="btn-edit px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-label-md transition-colors" type="button">
+              Editar
+            </button>
+<button class="btn-archive px-space-sm py-1.5 rounded-lg text-outline hover:text-error hover:bg-error-container/20 font-label-md text-label-md transition-colors" type="button">
+              Discontinuar
+            </button>
+</div>
+</div>
+</article>
+<!-- Card 2: Levotiroxina -->
+<article class="med-card relative flex flex-col justify-between bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-all" data-title="Levotiroxina 50mcg Endocrinología TSH Tiroides">
+<div class="flex items-start justify-between gap-space-sm mb-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="w-11 h-11 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[24px]">vital_signs</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Levotiroxina</h3>
+<span class="font-label-md text-label-md font-semibold text-primary">50 mcg</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Endocrinología • 1 comprimido en ayunas</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 bg-surface-container-high text-on-surface px-space-sm py-1 rounded-full font-label-sm text-label-sm shrink-0">
+<span class="material-symbols-outlined text-[15px] text-primary">schedule</span>
+            07:30 hs
+          </span>
+</div>
+<div class="space-y-space-xs mb-space-md py-space-xs bg-surface-container-low/60 rounded-lg px-space-md">
+<div class="flex items-center gap-space-xs font-body-sm text-body-sm text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary">info</span>
+<span class="font-semibold">Para qué sirve:</span> Regulación de función tiroidea (TSH)
+          </div>
+<div class="flex items-center gap-space-xs font-body-sm text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-outline">person</span>
+<span class="">Indicó Dra. Silvia Gómez (Endocrinóloga)</span>
+</div>
+<div class="flex items-start gap-space-xs font-body-sm text-body-sm text-tertiary-container">
+<span class="material-symbols-outlined text-[16px] text-tertiary shrink-0">priority_high</span>
+<span class="">Esperar 30 min antes de ingerir café o té.</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="inline-flex items-center gap-1 text-[#047857] bg-[#ECFDF5] font-label-sm text-label-sm px-2.5 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+            Activa
+          </span>
+<div class="flex items-center gap-space-xs">
+<button class="btn-edit px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-label-md transition-colors" type="button">
+              Editar
+            </button>
+<button class="btn-archive px-space-sm py-1.5 rounded-lg text-outline hover:text-error hover:bg-error-container/20 font-label-md text-label-md transition-colors" type="button">
+              Discontinuar
+            </button>
+</div>
+</div>
+</article>
+<!-- Card 3: Calcio + Vitamina D -->
+<article class="med-card relative flex flex-col justify-between bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-all" data-title="Calcio Vitamina D Traumatología Huesos Almuerzo">
+<div class="flex items-start justify-between gap-space-sm mb-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="w-11 h-11 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[24px]">science</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Calcio + Vit D</h3>
+<span class="font-label-md text-label-md font-semibold text-primary">500mg / 400UI</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Traumatología • 1 comprimido masticable</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 bg-surface-container-high text-on-surface px-space-sm py-1 rounded-full font-label-sm text-label-sm shrink-0">
+<span class="material-symbols-outlined text-[15px] text-primary">schedule</span>
+            13:00 hs
+          </span>
+</div>
+<div class="space-y-space-xs mb-space-md py-space-xs bg-surface-container-low/60 rounded-lg px-space-md">
+<div class="flex items-center gap-space-xs font-body-sm text-body-sm text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary">info</span>
+<span class="font-semibold">Para qué sirve:</span> Densidad ósea y prevención de fragilidad
+          </div>
+<div class="flex items-center gap-space-xs font-body-sm text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-outline">person</span>
+<span class="">Indicó Dr. Carrizo (Traumatología)</span>
+</div>
+<div class="flex items-start gap-space-xs font-body-sm text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary shrink-0">sticky_note_2</span>
+<span class="">Masticar bien durante el almuerzo para mejor asimilación.</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="inline-flex items-center gap-1 text-[#047857] bg-[#ECFDF5] font-label-sm text-label-sm px-2.5 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+            Activa
+          </span>
+<div class="flex items-center gap-space-xs">
+<button class="btn-edit px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-label-md transition-colors" type="button">
+              Editar
+            </button>
+<button class="btn-archive px-space-sm py-1.5 rounded-lg text-outline hover:text-error hover:bg-error-container/20 font-label-md text-label-md transition-colors" type="button">
+              Discontinuar
+            </button>
+</div>
+</div>
+</article>
+<!-- Card 4: Atorvastatina -->
+<article class="med-card relative flex flex-col justify-between bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-all" data-title="Atorvastatina 20mg Cardiología Colesterol Noche Cena">
+<div class="flex items-start justify-between gap-space-sm mb-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="w-11 h-11 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[24px]">nightlight</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Atorvastatina</h3>
+<span class="font-label-md text-label-md font-semibold text-primary">20 mg</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Cardiología • 1 comprimido nocturno</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 bg-surface-container-high text-on-surface px-space-sm py-1 rounded-full font-label-sm text-label-sm shrink-0">
+<span class="material-symbols-outlined text-[15px] text-primary">schedule</span>
+            21:30 hs
+          </span>
+</div>
+<div class="space-y-space-xs mb-space-md py-space-xs bg-surface-container-low/60 rounded-lg px-space-md">
+<div class="flex items-center gap-space-xs font-body-sm text-body-sm text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary">info</span>
+<span class="font-semibold">Para qué sirve:</span> Control de colesterol y salud vascular
+          </div>
+<div class="flex items-center gap-space-xs font-body-sm text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-outline">person</span>
+<span class="">Indicó Dr. Morales (Cardiólogo de cabecera)</span>
+</div>
+<div class="flex items-start gap-space-xs font-body-sm text-body-sm text-error">
+<span class="material-symbols-outlined text-[16px] text-error shrink-0">inventory_2</span>
+<span class="">Comprar antes del viernes: queda 1 blíster (7 comp.)</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="inline-flex items-center gap-1 text-[#047857] bg-[#ECFDF5] font-label-sm text-label-sm px-2.5 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+            Activa
+          </span>
+<div class="flex items-center gap-space-xs">
+<button class="btn-edit px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-md text-label-md transition-colors" type="button">
+              Editar
+            </button>
+<button class="btn-archive px-space-sm py-1.5 rounded-lg text-outline hover:text-error hover:bg-error-container/20 font-label-md text-label-md transition-colors" type="button">
+              Discontinuar
+            </button>
+</div>
+</div>
+</article>
+</div>
+</div>
+<!-- SECTION 2: Medicaciones Discontinuadas / Reserva -->
+<div class="flex flex-col gap-space-md mb-space-xl" id="sectionDiscontinuadas">
+<details class="group bg-surface-container-low rounded-xl p-space-md shadow-sm transition-all duration-200" open="">
+<summary class="flex items-center justify-between cursor-pointer list-none select-none p-space-xs">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-outline-variant/40 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+              Medicaciones discontinuadas o de reserva
+            </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Fármacos suspendidos o indicados solo en caso de dolor agudo / rescate.
+            </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-label-sm text-label-sm bg-surface-container-highest px-space-sm py-0.5 rounded-full text-on-surface-variant font-medium">2 registradas</span>
+<span class="material-symbols-outlined text-outline transition-transform duration-200 group-open:rotate-180">expand_more</span>
+</div>
+</summary>
+<!-- Discontinued Cards Container -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md mt-space-lg pt-space-md">
+<!-- Discontinued Card 1: Omeprazol -->
+<article class="med-card flex flex-col justify-between bg-surface-container-lowest/80 rounded-xl p-space-lg shadow-sm" data-title="Omeprazol 20mg Estomago Gastroenterólogo Discontinuado">
+<div>
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface-variant">Omeprazol 20 mg</h3>
+<p class="font-body-sm text-body-sm text-outline">Protector gástrico matutino</p>
+</div>
+<span class="inline-flex items-center gap-1 bg-surface-container text-on-surface-variant px-2.5 py-0.5 rounded-full font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">cancel</span>
+                Suspendido
+              </span>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded-lg mb-space-md space-y-1">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+<span class="font-semibold text-on-surface">Motivo de baja:</span> Finalizó ciclo protector tras tratamiento con antibióticos.
+              </p>
+<p class="font-body-sm text-body-sm text-outline">
+                Suspendido el 15/09 por Dr. Ferreyra (Gastroenterología).
+              </p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-sm text-label-sm text-outline">En botiquín: 1 caja cerrada</span>
+<button class="btn-reactivate font-label-md text-label-md text-primary hover:text-primary-container px-space-sm py-1 rounded hover:bg-primary-container/10 transition-colors" type="button">
+              Reactivar toma
+            </button>
+</div>
+</article>
+<!-- Discontinued Card 2: Paracetamol -->
+<article class="med-card flex flex-col justify-between bg-surface-container-lowest/80 rounded-xl p-space-lg shadow-sm" data-title="Paracetamol 500mg Fiebre Dolor Rescate">
+<div>
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface-variant">Paracetamol 500 mg</h3>
+<p class="font-body-sm text-body-sm text-outline">Comprimidos • Solo SOS (Rescate dolor/fiebre)</p>
+</div>
+<span class="inline-flex items-center gap-1 bg-tertiary-fixed text-on-tertiary-fixed px-2.5 py-0.5 rounded-full font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">medical_services</span>
+                De reserva
+              </span>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded-lg mb-space-md space-y-1">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+<span class="font-semibold text-on-surface">Pauta:</span> Solo si presenta temperatura &gt; 37.8°C o dolor lumbar molesto. Máx 2 al día.
+              </p>
+<p class="font-body-sm text-body-sm text-outline">
+                Indicado por Dra. Méndez (Clínica médica).
+              </p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-sm text-label-sm text-outline">En botiquín: 10 comprimidos</span>
+<button class="btn-reactivate font-label-md text-label-md text-primary hover:text-primary-container px-space-sm py-1 rounded hover:bg-primary-container/10 transition-colors" type="button">
+              Reactivar toma
+            </button>
+</div>
+</article>
+</div>
+</details>
+</div>
+<!-- Bottom Helper Navigation Footer -->
+<div class="mt-space-lg bg-surface-container rounded-xl p-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md text-center sm:text-left">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">calendar_today</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold">¿Necesitas registrar las tomas de hoy?</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Vuelve al cronograma diario para chequear las dosis de la mañana, tarde y noche.</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<a class="inline-flex items-center gap-space-xs bg-primary text-on-primary hover:bg-primary-container px-space-xl py-space-md rounded-lg font-label-lg text-label-lg transition-all shadow-sm" data-path="hoy" href="#">
+<span class="">Ir a las tomas de Hoy</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    const btnOpenNewMed = document.getElementById('btnOpenNewMed');
+    const btnCloseDrawer = document.getElementById('btnCloseDrawer');
+    const btnCancelDrawer = document.getElementById('btnCancelDrawer');
+    const newMedDrawer = document.getElementById('newMedDrawer');
+    const medForm = document.getElementById('medForm');
+    const searchInput = document.getElementById('searchInput');
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const sectionActivas = document.getElementById('sectionActivas');
+    const sectionDiscontinuadas = document.getElementById('sectionDiscontinuadas');
+    const medCards = document.querySelectorAll('.med-card');
+
+    function toggleDrawer(show) {
+      if (show) {
+        newMedDrawer.classList.remove('hidden');
+        newMedDrawer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        newMedDrawer.classList.add('hidden');
+      }
+    }
+
+    if (btnOpenNewMed) {
+      btnOpenNewMed.addEventListener('click', () => toggleDrawer(true));
+    }
+    if (btnCloseDrawer) {
+      btnCloseDrawer.addEventListener('click', () => toggleDrawer(false));
+    }
+    if (btnCancelDrawer) {
+      btnCancelDrawer.addEventListener('click', () => toggleDrawer(false));
+    }
+
+    if (medForm) {
+      medForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Medicamento guardado con éxito en el vademécum de Elsa.');
+        toggleDrawer(false);
+        medForm.reset();
+      });
+    }
+
+    // Filter status tabs
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        filterTabs.forEach(t => {
+          t.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
+          t.classList.add('text-on-surface-variant');
+        });
+        tab.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+        tab.classList.remove('text-on-surface-variant');
+
+        const filter = tab.getAttribute('data-filter');
+        if (filter === 'all') {
+          sectionActivas.style.display = 'flex';
+          sectionDiscontinuadas.style.display = 'flex';
+        } else if (filter === 'active') {
+          sectionActivas.style.display = 'flex';
+          sectionDiscontinuadas.style.display = 'none';
+        } else if (filter === 'discontinued') {
+          sectionActivas.style.display = 'none';
+          sectionDiscontinuadas.style.display = 'flex';
+        }
+      });
+    });
+
+    // Real-time search filter
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        medCards.forEach(card => {
+          const content = (card.getAttribute('data-title') || '').toLowerCase();
+          const text = card.innerText.toLowerCase();
+          if (content.includes(query) || text.includes(query)) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    }
+
+    // Micro-interactions for buttons inside cards
+    document.querySelectorAll('.btn-edit').forEach(btn => {
+      btn.addEventListener('click', () => {
+        toggleDrawer(true);
+      });
+    });
+
+    document.querySelectorAll('.btn-archive').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (confirm('¿Desea mover esta medicación al registro de discontinuadas/reserva?')) {
+          alert('Medicación actualizada.');
+        }
+      });
+    });
+
+    document.querySelectorAll('.btn-reactivate').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (confirm('¿Reactivar esta medicación como tratamiento habitual de Elsa?')) {
+          alert('Medicación reincorporada a las tomas diarias.');
+        }
+      });
+    });
+  })();
+</script></main><footer class="w-full bg-surface-container-low py-space-lg mt-space-xl shadow-[0_-1px_6px_rgba(0,0,0,0.02)]"><div class="max-w-[1120px] mx-auto px-gutter-desktop flex flex-col sm:flex-row items-center justify-between gap-space-md text-center sm:text-left"><div class="flex items-center gap-space-sm justify-center sm:justify-start"><span class="material-symbols-outlined text-primary text-[20px]">spa</span><p class="font-body-sm text-body-sm text-on-surface-variant">Cuidando con amor y tranquilidad. Cada toma a su debido tiempo.</p></div><div class="flex items-center gap-space-sm text-on-surface-variant font-label-sm text-label-sm"><span class="">CuidAR • Asistencia Familiar</span></div></div></footer>
+
+</body></html>
