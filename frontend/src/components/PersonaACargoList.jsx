@@ -25,7 +25,7 @@ function PersonaCardSkeleton() {
   );
 }
 
-function PersonaACargoList({ refreshTrigger }) {
+function PersonaACargoList({ refreshTrigger, currentId, onSelect }) {
   const [personas, setPersonas] = useState([]);
   // loading = primera carga (no hay nada que mostrar). refreshing = recarga con datos en pantalla.
   const [loading, setLoading] = useState(true);
@@ -188,7 +188,10 @@ function PersonaACargoList({ refreshTrigger }) {
         {personas.map((persona) => (
           <article
             key={persona.id}
-            className="flex flex-col gap-space-md rounded-xl bg-surface-container-lowest p-space-lg shadow-xs transition-shadow hover:shadow-md"
+            aria-current={persona.id === currentId ? 'true' : undefined}
+            className={`flex flex-col gap-space-md rounded-xl bg-surface-container-lowest p-space-lg shadow-xs transition-shadow hover:shadow-md ${
+              persona.id === currentId ? 'ring-2 ring-primary-container/40' : ''
+            }`}
           >
             <div className="flex items-start gap-space-md">
               <div
@@ -251,6 +254,30 @@ function PersonaACargoList({ refreshTrigger }) {
                   sticky_note_2
                 </span>
                 <p>{persona.notas}</p>
+              </div>
+            )}
+
+            {onSelect && (
+              <div className="flex justify-end">
+                {persona.id === currentId ? (
+                  <span className="inline-flex items-center gap-1 rounded-full bg-secondary-fixed/40 px-space-sm py-1 font-label-sm text-label-sm text-on-secondary-fixed-variant">
+                    <span className="material-symbols-outlined text-[14px]" aria-hidden="true">
+                      favorite
+                    </span>
+                    Viendo su ficha
+                  </span>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => onSelect(persona.id)}
+                    className="inline-flex min-h-12 items-center gap-1 rounded-lg px-space-md font-label-md text-label-md text-primary transition-colors hover:bg-primary-container/10"
+                  >
+                    Ver su ficha
+                    <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
+                      chevron_right
+                    </span>
+                  </button>
+                )}
               </div>
             )}
           </article>

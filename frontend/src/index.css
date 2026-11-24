@@ -152,6 +152,19 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /* Ficha médica: en papel, sin sombras ni fondos de color (DESIGN.md · Print override). */
+  @media print {
+    @page {
+      margin: 14mm;
+    }
+    body {
+      background: #ffffff;
+    }
+    * {
+      box-shadow: none !important;
+    }
+  }
+
   /* Con un modal abierto, la página de fondo no scrollea. */
   html:has(dialog[open]:modal) {
     overflow: hidden;

@@ -1,6 +1,8 @@
-import { useState } from 'react';
-import { create } from '../services/dependents.service';
+import { useEffect, useId, useState } from 'react';
+import { create, update } from '../services/dependents.service';
 import Spinner from './Spinner';
+
+const SUCCESS_TIMEOUT_MS = 3000;
 
 const initialFormState = {
   nombre_completo: '',
@@ -18,11 +20,36 @@ const fieldClass =
 
 const labelClass = 'font-label-md text-label-md text-on-surface';
 
-function PersonaACargoForm({ onCreated }) {
-  const [form, setForm] = useState(initialFormState);
+// Persona de la API → estado del form (null pasa a '' para los inputs controlados).
+const toFormState = (persona) =>
+  Object.fromEntries(Object.keys(initialFormState).map((key) => [key, persona?.[key] ?? '']));
+
+/**
+ * Alta o edición de una persona a cargo.
+ * Con `persona` edita (update); sin ella da de alta (create).
+ * `onSaved(personaGuardada)` se llama después de guardar.
+ */
+function PersonaACargoForm({ persona, onSaved }) {
+  const isEditing = Boolean(persona);
+  // Puede haber dos forms en la misma página (edición y alta): ids únicos por instancia.
+  const uid = useId();
+  const [form, setForm] = useState(() => toFormState(persona));
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const [successMsg, setSuccessMsg] = useState(null);
+
+  // Si cambia la persona que se edita (selector del header), recargamos sus datos.
+  useEffect(() => {
+    setForm(toFormState(persona));
+    setError(null);
+  }, [persona]);
+
+  // El badge de éxito se va solo a los 3s.
+  useEffect(() => {
+    if (!successMsg) return undefined;
+    const timeoutId = setTimeout(() => setSuccessMsg(null), SUCCESS_TIMEOUT_MS);
+    return () => clearTimeout(timeoutId);
+  }, [successMsg]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,16 +65,20 @@ function PersonaACargoForm({ onCreated }) {
     try {
       // Los opcionales vacíos viajan como null, igual que los guarda el modelo.
       const payload = Object.fromEntries(
-        Object.entries(form).map(([key, value]) => [key, value.trim() || null])
+        Object.entries(form).map(([key, value]) => [key, String(value).trim() || null])
       );
 
-      await create(payload);
+      const saved = isEditing ? await update(persona.id, payload) : await create(payload);
 
-      setSuccessMsg('Persona a cargo registrada con éxito.');
-      setForm(initialFormState);
+      if (isEditing) {
+        setSuccessMsg('Datos actualizados con éxito.');
+      } else {
+        setSuccessMsg('Persona a cargo registrada con éxito.');
+        setForm(initialFormState);
+      }
 
-      if (typeof onCreated === 'function') {
-        onCreated();
+      if (typeof onSaved === 'function') {
+        onSaved(saved);
       }
     } catch (err) {
       const errorMsg =
@@ -61,16 +92,18 @@ function PersonaACargoForm({ onCreated }) {
   };
 
   return (
-    <section className="mb-space-xl rounded-xl bg-surface-container-lowest p-space-lg font-body-md text-body-md text-on-surface shadow-md sm:p-margin-desktop">
+    <section className="rounded-xl bg-surface-container-lowest p-space-lg font-body-md text-body-md text-on-surface shadow-xs sm:p-margin-desktop">
       <div className="mb-space-lg flex items-center gap-space-sm">
         <div
           className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary"
           aria-hidden="true"
         >
-          <span className="material-symbols-outlined text-[24px]">person_add</span>
+          <span className="material-symbols-outlined text-[24px]">{isEditing ? 'badge' : 'person_add'}</span>
         </div>
         <div>
-          <h2 className="font-headline-sm text-headline-sm text-on-surface">Nueva Persona a Cargo</h2>
+          <h2 className="font-headline-sm text-headline-sm text-on-surface">
+            {isEditing ? 'Datos de la persona' : 'Nueva Persona a Cargo'}
+          </h2>
           <p className="font-body-sm text-body-sm text-on-surface-variant">
             Con estos datos se arma la ficha para el médico.
           </p>
@@ -91,17 +124,17 @@ function PersonaACargoForm({ onCreated }) {
         </div>
       )}
 
-      {successMsg && (
-        <div
-          role="status"
-          className="mb-space-md flex items-start gap-space-sm rounded-lg bg-secondary-fixed/40 p-space-md font-body-sm text-body-sm text-on-secondary-fixed-variant"
-        >
-          <span className="material-symbols-outlined shrink-0 text-[20px]" aria-hidden="true">
-            check_circle
+      {/* Live region siempre montada para que el lector de pantalla anuncie el cambio. */}
+      <div role="status" aria-live="polite">
+        {successMsg && (
+          <span className="mb-space-md inline-flex items-center gap-1 rounded-full bg-secondary-fixed/40 px-space-md py-space-xs font-label-md text-label-md text-on-secondary-fixed-variant">
+            <span className="material-symbols-outlined text-[16px]" aria-hidden="true">
+              check_circle
+            </span>
+            {successMsg}
           </span>
-          <p>{successMsg}</p>
-        </div>
-      )}
+        )}
+      </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-space-lg">
         <div className="grid grid-cols-1 gap-space-lg lg:grid-cols-2">
@@ -113,12 +146,12 @@ function PersonaACargoForm({ onCreated }) {
             </div>
 
             <div className="flex flex-col gap-space-xs">
-              <label htmlFor="nombre_completo" className={labelClass}>
+              <label htmlFor={`${uid}-nombre_completo`} className={labelClass}>
                 Nombre Completo y Apellido *
               </label>
               <input
                 type="text"
-                id="nombre_completo"
+                id={`${uid}-nombre_completo`}
                 name="nombre_completo"
                 value={form.nombre_completo}
                 onChange={handleChange}
@@ -130,12 +163,12 @@ function PersonaACargoForm({ onCreated }) {
 
             <div className="grid grid-cols-1 gap-space-md sm:grid-cols-2">
               <div className="flex flex-col gap-space-xs">
-                <label htmlFor="fecha_nacimiento" className={labelClass}>
+                <label htmlFor={`${uid}-fecha_nacimiento`} className={labelClass}>
                   Fecha de Nacimiento *
                 </label>
                 <input
                   type="date"
-                  id="fecha_nacimiento"
+                  id={`${uid}-fecha_nacimiento`}
                   name="fecha_nacimiento"
                   value={form.fecha_nacimiento}
                   onChange={handleChange}
@@ -145,12 +178,12 @@ function PersonaACargoForm({ onCreated }) {
               </div>
 
               <div className="flex flex-col gap-space-xs">
-                <label htmlFor="dni" className={labelClass}>
+                <label htmlFor={`${uid}-dni`} className={labelClass}>
                   DNI / Documento
                 </label>
                 <input
                   type="text"
-                  id="dni"
+                  id={`${uid}-dni`}
                   name="dni"
                   value={form.dni}
                   onChange={handleChange}
@@ -161,12 +194,12 @@ function PersonaACargoForm({ onCreated }) {
             </div>
 
             <div className="flex flex-col gap-space-xs">
-              <label htmlFor="parentesco" className={labelClass}>
+              <label htmlFor={`${uid}-parentesco`} className={labelClass}>
                 Parentesco con el Cuidador
               </label>
               <input
                 type="text"
-                id="parentesco"
+                id={`${uid}-parentesco`}
                 name="parentesco"
                 value={form.parentesco}
                 onChange={handleChange}
@@ -185,12 +218,12 @@ function PersonaACargoForm({ onCreated }) {
 
             <div className="grid grid-cols-1 gap-space-md sm:grid-cols-2">
               <div className="flex flex-col gap-space-xs">
-                <label htmlFor="obra_social" className={labelClass}>
+                <label htmlFor={`${uid}-obra_social`} className={labelClass}>
                   Obra Social / Prepaga
                 </label>
                 <input
                   type="text"
-                  id="obra_social"
+                  id={`${uid}-obra_social`}
                   name="obra_social"
                   value={form.obra_social}
                   onChange={handleChange}
@@ -200,12 +233,12 @@ function PersonaACargoForm({ onCreated }) {
               </div>
 
               <div className="flex flex-col gap-space-xs">
-                <label htmlFor="numero_afiliado" className={labelClass}>
+                <label htmlFor={`${uid}-numero_afiliado`} className={labelClass}>
                   Número de Afiliado
                 </label>
                 <input
                   type="text"
-                  id="numero_afiliado"
+                  id={`${uid}-numero_afiliado`}
                   name="numero_afiliado"
                   value={form.numero_afiliado}
                   onChange={handleChange}
@@ -216,11 +249,11 @@ function PersonaACargoForm({ onCreated }) {
             </div>
 
             <div className="flex flex-col gap-space-xs">
-              <label htmlFor="notas" className={labelClass}>
+              <label htmlFor={`${uid}-notas`} className={labelClass}>
                 Notas de cuidado
               </label>
               <textarea
-                id="notas"
+                id={`${uid}-notas`}
                 name="notas"
                 rows="3"
                 value={form.notas}
@@ -245,7 +278,7 @@ function PersonaACargoForm({ onCreated }) {
                 save
               </span>
             )}
-            {submitting ? 'Guardando…' : 'Guardar Persona'}
+            {submitting ? 'Guardando…' : isEditing ? 'Guardar Cambios' : 'Guardar Persona'}
           </button>
         </div>
       </form>
