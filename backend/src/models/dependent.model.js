@@ -1,6 +1,14 @@
-import { randomUUID } from 'node:crypto';
+import prisma from '../lib/prisma.js';
+import {
+  formatDate,
+  formatTimestamp,
+  isUuid,
+  nullIfNotFound,
+  parseDate
+} from '../lib/serialize.js';
 
-const caregiverId = 'cuidador-123';
+// Cuidador fijo: lo crea prisma/seed.js.
+const caregiverId = '00000000-0000-4000-8000-000000000001';
 const editableFields = [
   'nombre_completo',
   'fecha_nacimiento',
@@ -9,35 +17,6 @@ const editableFields = [
   'obra_social',
   'numero_afiliado',
   'notas'
-];
-
-const dependents = [
-  {
-    id: 'elsa-01',
-    cuidador_id: caregiverId,
-    nombre_completo: 'Elsa',
-    fecha_nacimiento: '1948-01-01',
-    dni: null,
-    parentesco: null,
-    obra_social: null,
-    numero_afiliado: null,
-    notas: null,
-    created_at: '2025-01-01T00:00:00.000Z',
-    updated_at: '2025-01-01T00:00:00.000Z'
-  },
-  {
-    id: 'otro-99',
-    cuidador_id: caregiverId,
-    nombre_completo: 'Otra persona',
-    fecha_nacimiento: '1955-01-01',
-    dni: null,
-    parentesco: null,
-    obra_social: null,
-    numero_afiliado: null,
-    notas: null,
-    created_at: '2025-01-01T00:00:00.000Z',
-    updated_at: '2025-01-01T00:00:00.000Z'
-  }
 ];
 
 function calculateAge(fechaNacimiento) {
@@ -54,53 +33,68 @@ function calculateAge(fechaNacimiento) {
 }
 
 function serialize(dependent) {
-  return { ...dependent, edad: calculateAge(dependent.fecha_nacimiento) };
+  const fechaNacimiento = formatDate(dependent.fecha_nacimiento);
+  return {
+    ...dependent,
+    fecha_nacimiento: fechaNacimiento,
+    created_at: formatTimestamp(dependent.created_at),
+    updated_at: formatTimestamp(dependent.updated_at),
+    edad: calculateAge(fechaNacimiento)
+  };
+}
+
+function toColumn(field, value) {
+  return field === 'fecha_nacimiento' ? parseDate(value) : value;
 }
 
 async function getAll() {
+  const dependents = await prisma.persona_a_cargo.findMany({
+    orderBy: [{ created_at: 'asc' }, { id: 'asc' }]
+  });
   return dependents.map(serialize);
 }
 
 async function getById(id) {
-  const dependent = dependents.find((item) => item.id === id);
+  if (!isUuid(id)) return null;
+  const dependent = await prisma.persona_a_cargo.findUnique({ where: { id } });
   return dependent ? serialize(dependent) : null;
 }
 
 async function create(data) {
-  const now = new Date().toISOString();
-  const dependent = Object.fromEntries(
-    editableFields.map((field) => [field, data[field] ?? null])
-  );
-
-  Object.assign(dependent, {
-    id: randomUUID(),
-    cuidador_id: caregiverId,
-    created_at: now,
-    updated_at: now
+  const now = new Date();
+  const dependent = await prisma.persona_a_cargo.create({
+    data: {
+      ...Object.fromEntries(
+        editableFields.map((field) => [field, toColumn(field, data[field] ?? null)])
+      ),
+      cuidador_id: caregiverId,
+      created_at: now,
+      updated_at: now
+    }
   });
-  dependents.push(dependent);
-
   return serialize(dependent);
 }
 
 async function update(id, data) {
-  const dependent = dependents.find((item) => item.id === id);
-  if (!dependent) return null;
-
-  for (const field of editableFields) {
-    if (Object.hasOwn(data, field)) dependent[field] = data[field];
-  }
-  dependent.updated_at = new Date().toISOString();
-
-  return serialize(dependent);
+  if (!isUuid(id)) return null;
+  const changes = Object.fromEntries(
+    editableFields
+      .filter((field) => Object.hasOwn(data, field))
+      .map((field) => [field, toColumn(field, data[field])])
+  );
+  const dependent = await nullIfNotFound(
+    prisma.persona_a_cargo.update({
+      where: { id },
+      data: { ...changes, updated_at: new Date() }
+    })
+  );
+  return dependent ? serialize(dependent) : null;
 }
 
 async function remove(id) {
-  const index = dependents.findIndex((item) => item.id === id);
-  if (index === -1) return null;
-
-  const [dependent] = dependents.splice(index, 1);
-  return serialize(dependent);
+  if (!isUuid(id)) return null;
+  const dependent = await nullIfNotFound(prisma.persona_a_cargo.delete({ where: { id } }));
+  return dependent ? serialize(dependent) : null;
 }
 
 export default { getAll, getById, create, update, remove };

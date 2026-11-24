@@ -1,28 +1,19 @@
-import { randomUUID } from 'node:crypto';
+import prisma from '../lib/prisma.js';
+import { isUuid, nullIfNotFound } from '../lib/serialize.js';
 
 const editableFields = ['persona_id', 'nombre', 'especialidad', 'matricula'];
 
-const doctors = [
-  {
-    id: 'medico-elsa-01',
-    persona_id: 'elsa-01',
-    nombre: 'Dra. Pérez',
-    especialidad: 'Clínica médica',
-    matricula: null
-  }
-];
-
-// Lectura sincrónica para que otros modelos puedan embeber el médico al serializar.
-function peek(id) {
-  const doctor = doctors.find((item) => item.id === id);
-  return doctor ? { ...doctor } : null;
+async function peek(id) {
+  if (!isUuid(id)) return null;
+  return prisma.medico.findUnique({ where: { id } });
 }
 
 async function getAll(personaId) {
-  const result = personaId
-    ? doctors.filter((doctor) => doctor.persona_id === personaId)
-    : doctors;
-  return result.map((doctor) => ({ ...doctor }));
+  if (personaId && !isUuid(personaId)) return [];
+  return prisma.medico.findMany({
+    where: personaId ? { persona_id: personaId } : {},
+    orderBy: [{ nombre: 'asc' }, { id: 'asc' }]
+  });
 }
 
 async function getById(id) {
@@ -30,37 +21,27 @@ async function getById(id) {
 }
 
 async function create(data) {
-  const doctor = Object.fromEntries(
-    editableFields.map((field) => [field, data[field] ?? null])
-  );
-  doctor.id = randomUUID();
-  doctors.push(doctor);
-  return { ...doctor };
+  return prisma.medico.create({
+    data: Object.fromEntries(editableFields.map((field) => [field, data[field] ?? null]))
+  });
 }
 
 async function update(id, data) {
-  const doctor = doctors.find((item) => item.id === id);
-  if (!doctor) return null;
-
-  for (const field of editableFields) {
-    if (Object.hasOwn(data, field)) doctor[field] = data[field];
-  }
-  return { ...doctor };
+  if (!isUuid(id)) return null;
+  const changes = Object.fromEntries(
+    editableFields
+      .filter((field) => Object.hasOwn(data, field))
+      .map((field) => [field, data[field]])
+  );
+  return nullIfNotFound(prisma.medico.update({ where: { id }, data: changes }));
 }
 
 async function remove(id) {
-  const index = doctors.findIndex((item) => item.id === id);
-  if (index === -1) return null;
-
-  const [doctor] = doctors.splice(index, 1);
-  return { ...doctor };
+  if (!isUuid(id)) return null;
+  return nullIfNotFound(prisma.medico.delete({ where: { id } }));
 }
 
-// ON DELETE CASCADE desde persona_a_cargo.
-async function removeByPersona(personaId) {
-  for (let i = doctors.length - 1; i >= 0; i -= 1) {
-    if (doctors[i].persona_id === personaId) doctors.splice(i, 1);
-  }
-}
+// Lo resuelve Postgres (ON DELETE CASCADE desde persona_a_cargo).
+async function removeByPersona(personaId) {}
 
 export default { peek, getAll, getById, create, update, remove, removeByPersona };

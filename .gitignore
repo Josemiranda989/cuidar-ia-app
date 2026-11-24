@@ -12,6 +12,9 @@ logs/
 *.log
 npm-debug.log*
 
+# Cliente de Prisma (se regenera con prisma generate)
+backend/src/generated/
+
 # Cobertura y pruebas
 coverage/
 
