@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { getAll, update } from '../services/medications.service';
 import { useConfirm } from '../hooks/useConfirm';
 import { useDelayedFlag } from '../hooks/useDelayedFlag';
+import { firstName, useCurrentPersona } from '../context/CurrentPersonaContext';
+import { formatDate, formatDias, toLocalISODate } from '../utils/date';
 import Spinner from './Spinner';
 
 const FILTERS = [
@@ -64,9 +66,17 @@ function MedicacionList({ refreshTrigger, onEdit }) {
   // "Reintentar" lo incrementa para volver a disparar el fetch.
   const [reloadKey, setReloadKey] = useState(0);
   const [confirm, confirmDialog] = useConfirm();
+  const { currentPersona, currentPersonaId } = useCurrentPersona();
+  const lastPersonaRef = useRef(currentPersonaId);
 
   useEffect(() => {
     let isMounted = true;
+    // Cambiar de persona es una carga nueva: los datos en pantalla son de otra persona.
+    if (lastPersonaRef.current !== currentPersonaId) {
+      lastPersonaRef.current = currentPersonaId;
+      hasLoadedRef.current = false;
+      setMedications([]);
+    }
     // Si ya hay datos, no los borramos: refresco en el lugar, sin parpadeo ni salto de scroll.
     if (hasLoadedRef.current) {
       setRefreshing(true);
@@ -75,7 +85,7 @@ function MedicacionList({ refreshTrigger, onEdit }) {
     }
     setError(null);
 
-    getAll()
+    getAll(currentPersonaId)
       .then((data) => {
         if (isMounted) {
           setMedications(Array.isArray(data) ? data : []);
@@ -99,7 +109,7 @@ function MedicacionList({ refreshTrigger, onEdit }) {
     return () => {
       isMounted = false;
     };
-  }, [refreshTrigger, reloadKey]);
+  }, [refreshTrigger, reloadKey, currentPersonaId]);
 
   // El badge de éxito se va solo a los 3s.
   useEffect(() => {
@@ -129,9 +139,13 @@ function MedicacionList({ refreshTrigger, onEdit }) {
     setPendingId(med.id);
 
     try {
-      const updated = await update(med.id, {
-        estado: discontinuing ? 'discontinuada' : 'activa',
-      });
+      // Discontinuar fecha el fin del tratamiento; reactivar lo reabre.
+      const updated = await update(
+        med.id,
+        discontinuing
+          ? { estado: 'discontinuada', fecha_fin: toLocalISODate() }
+          : { estado: 'activa', fecha_fin: null, motivo_baja: null }
+      );
       // El PATCH devuelve la medicación actualizada: la reemplazamos sin volver a pedir la lista.
       setMedications((prev) => prev.map((item) => (item.id === updated.id ? updated : item)));
       setSuccessMsg(discontinuing ? `${nombre} discontinuada.` : `${nombre} reactivada.`);
@@ -225,7 +239,7 @@ function MedicacionList({ refreshTrigger, onEdit }) {
         <div className="flex items-center gap-space-xs">
           <span className="h-3 w-3 rounded-full bg-secondary" aria-hidden="true"></span>
           <h2 className="font-headline-sm text-headline-sm font-bold text-on-surface">
-            Listado de Medicaciones
+            {currentPersona ? `Medicamentos de ${firstName(currentPersona)}` : 'Listado de Medicaciones'}
           </h2>
           {showRefreshing && (
             <span className="ml-1 inline-flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant">
@@ -367,17 +381,39 @@ function MedicacionList({ refreshTrigger, onEdit }) {
                       </div>
                     </div>
 
-                    {med.es_sos && (
+                    {med.es_sos ? (
                       <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-tertiary-fixed px-2.5 py-1 font-label-sm text-label-sm text-on-tertiary-fixed">
                         <span className="material-symbols-outlined text-[14px]" aria-hidden="true">
                           medical_services
                         </span>
                         SOS
                       </span>
+                    ) : (
+                      med.horarios?.length > 0 && (
+                        <ul className="flex shrink-0 flex-col items-end gap-1" aria-label="Horarios">
+                          {med.horarios.map((horario) => (
+                            <li
+                              key={horario.id}
+                              title={formatDias(horario.dias_semana)}
+                              className="inline-flex items-center gap-1 rounded-full bg-surface-container-high px-space-sm py-1 font-label-sm text-label-sm text-on-surface tabular-nums"
+                            >
+                              <span className="material-symbols-outlined text-[15px] text-primary" aria-hidden="true">
+                                schedule
+                              </span>
+                              {horario.hora} hs
+                              {horario.dias_semana.length < 7 && (
+                                <span className="font-normal text-on-surface-variant">
+                                  · {formatDias(horario.dias_semana)}
+                                </span>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                      )
                     )}
                   </div>
 
-                  {(med.motivo || med.indicaciones || med.motivo_baja) && (
+                  {(med.motivo || med.medico || med.indicaciones || med.motivo_baja) && (
                     <div className="mb-space-md space-y-space-xs rounded-lg bg-surface-container-low/60 px-space-md py-space-sm">
                       {med.motivo && (
                         <div className="flex items-start gap-space-xs font-body-sm text-body-sm text-on-surface">
@@ -386,6 +422,17 @@ function MedicacionList({ refreshTrigger, onEdit }) {
                           </span>
                           <p>
                             <span className="font-semibold">Para qué sirve:</span> {med.motivo}
+                          </p>
+                        </div>
+                      )}
+                      {med.medico && (
+                        <div className="flex items-start gap-space-xs font-body-sm text-body-sm text-on-surface-variant">
+                          <span className="material-symbols-outlined shrink-0 text-[16px] text-outline" aria-hidden="true">
+                            person
+                          </span>
+                          <p>
+                            Indicó {med.medico.nombre}
+                            {med.medico.especialidad && <> ({med.medico.especialidad})</>}
                           </p>
                         </div>
                       )}
@@ -412,8 +459,8 @@ function MedicacionList({ refreshTrigger, onEdit }) {
                   )}
 
                   <p className="mb-space-sm font-label-sm text-label-sm text-outline tabular-nums">
-                    Desde {med.fecha_inicio}
-                    {med.fecha_fin && <> · Hasta {med.fecha_fin}</>}
+                    Desde {formatDate(med.fecha_inicio)}
+                    {med.fecha_fin && <> · Hasta {formatDate(med.fecha_fin)}</>}
                   </p>
                 </div>
 
