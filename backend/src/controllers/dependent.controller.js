@@ -1,4 +1,8 @@
+import conditionModel from '../models/condition.model.js';
 import dependentModel from '../models/dependent.model.js';
+import doctorModel from '../models/doctor.model.js';
+import doseModel from '../models/dose.model.js';
+import medicationModel from '../models/medication.model.js';
 
 function sendNotFound(res) {
   return res.status(404).json({
@@ -49,6 +53,12 @@ async function update(req, res) {
 async function remove(req, res) {
   const dependent = await dependentModel.remove(req.params.id);
   if (!dependent) return sendNotFound(res);
+
+  // ON DELETE CASCADE: medicaciones (con sus horarios y tomas), médicos y condiciones.
+  const medicationIds = await medicationModel.removeByPersona(dependent.id);
+  await Promise.all(medicationIds.map((id) => doseModel.removeByMedication(id)));
+  await doctorModel.removeByPersona(dependent.id);
+  await conditionModel.removeByPersona(dependent.id);
 
   return res.status(200).json({ status: 'success', data: dependent });
 }
